@@ -1,0 +1,42 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 12
+    lettuce:
+      pool:
+        max-active: 300
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    dynamic:
+      primary: default
+      druid:
+        filters:
+        testWhileIdle: true
+        validationQuery: select 1
+      datasource:
+        #默认的bi配置
+        default:
+          url: jdbc:mysql://localhost:3306/chaojishenpi?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
+          username: root
+          password: password
+        #自定义仪表盘设置
+        setting:
+          url: jdbc:mysql://localhost:3306/chaojishenpimodulesversionnojson?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
+          username: root
+          password: password
+        #自定义仪表盘数据，暂时未和default合并
+        bi:
+          url: jdbc:clickhouse://192.168.0.170:8123/wk_dashboard_test2
+          username: default
+          password: default
+          driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+#          url: jdbc:clickhouse://cc-2zeie61ml3da29uox.public.clickhouse.ads.aliyuncs.com:8123/wk_manager_test
+#          username: root
+#          password: password
+#          driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+mybatis-plus:
+  mapper-locations:
+    - classpath:/mapper/${bi.xmlPath}/*.xml
+    - classpath:/extend/mapper/xml/*.xml
