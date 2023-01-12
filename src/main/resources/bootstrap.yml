@@ -1,7 +1,22 @@
 server:
-  port: 0
+  port: 8888
 spring:
   profiles:
     active: core,dev
   application:
     name: bi
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:123456}
+    database: 8
+    lettuce:
+      pool:
+        max-active: 300
+    datasource:
+      url: jdbc:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:127.0.0.1}:${DATASOURCE_PORT:3306}/anji20221229?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true
+      username: ${DATASOURCE_USERNAME:root}
+      password: ${DATASOURCE_PASSWORD:password}
+#      sql日志打印配置
+#     url: jdbc:p6spy:${DATASOURCE_DBTYPE:mysql}://${DATASOURCE_HOST:127.0.0.1}:${DATASOURCE_PORT:3306}/anji20221229?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true
+#     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
