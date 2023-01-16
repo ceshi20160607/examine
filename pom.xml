@@ -19,6 +19,7 @@
         <fastjson.version>1.2.83</fastjson.version>
         <druid.version>1.2.8</druid.version>
         <baomidou.version>3.2.1</baomidou.version>
+        <generator.version>3.2.0</generator.version>
         <poi.version>4.1.2</poi.version>
         <p6spy.version>3.9.1</p6spy.version>
     </properties>
@@ -48,6 +49,17 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+        <!--打印sql日志-->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>${p6spy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${generator.version}</version>
         </dependency>
 
 
@@ -81,12 +93,6 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
-        </dependency>
-        <!--打印sql日志-->
-        <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
-            <version>${p6spy.version}</version>
         </dependency>
     </dependencies>
 
