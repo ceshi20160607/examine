@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Generator {
 
-    public static final String GENERATOR_URL="jdbc:mysql://localhost:3306/anji20221229";
+    public static final String GENERATOR_URL="jdbc:mysql://localhost:3306/unexamine";
     public static final String GENERATOR_USERNAME="root";
     public static final String GENERATOR_PASSWORD="password";
     public static final String GENERATOR_AUTHOR="UNIQUE";
@@ -51,8 +51,8 @@ public class Generator {
                     builder
 //                            .addInclude("wk_examine") // 设置需要生成的表名
                             .enableSkipView()
-                            .addTablePrefix("wk_")// 设置过滤表前缀
-                            .likeTable(new LikeTable("wk_"+moduleName, SqlLike.RIGHT))
+                            .addTablePrefix("un_")// 设置过滤表前缀
+                            .likeTable(new LikeTable("un_"+moduleName, SqlLike.RIGHT))
                             .entityBuilder().enableLombok().addTableFills(tableFillList)
                             .controllerBuilder().enableRestStyle()
 //                            .mapperBuilder().superClass("")
