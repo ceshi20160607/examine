@@ -20,7 +20,8 @@ public class Generator {
     public static final String GENERATOR_PASSWORD="password";
     public static final String GENERATOR_AUTHOR="UNIQUE";
     public static final String GENERATOR_PACKAGE="com.unique.examine";
-    public static final String GENERATOR_LOCAL_PATH="D://download//java//generator";
+//    public static final String GENERATOR_LOCAL_PATH="D://download//java//generator";
+    public static final String GENERATOR_LOCAL_PATH="E://mysnow//open//examine//src//main//java";
 
     public static void main(String[] args) {
         System.out.println("请模块名称：");

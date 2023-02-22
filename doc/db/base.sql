@@ -1,14 +1,14 @@
 -- 1.0基础结构
 CREATE TABLE `un_examine_group` (
 `id` bigint(20) NOT NULL COMMENT '分组id',
-`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '分组名称',
+`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '分组名称',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '更新人',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `update_time` datetime DEFAULT NULL COMMENT '更新时间',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批分组表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批分组表';
 
 CREATE TABLE `un_examine_setting_user` (
 `id` bigint(20) NOT NULL COMMENT 'id',
@@ -23,7 +23,7 @@ CREATE TABLE `un_examine_setting_user` (
 `update_time` datetime DEFAULT NULL COMMENT '更新时间',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批适用用户部门表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批适用用户部门表';
 
 CREATE TABLE `un_examine_setting` (
 `id` bigint(20) NOT NULL COMMENT 'id',
@@ -37,44 +37,44 @@ CREATE TABLE `un_examine_setting` (
 `limit_time_num` int(11) DEFAULT NULL COMMENT '现时时间',
 `limit_time_unit` int(11) DEFAULT NULL COMMENT '现时时间单位',
 
-`apply_type` int(10) NOT NULL COMMENT '适用类型 0默认 1用户 2部门',
+`apply_type` int(10) NOT NULL COMMENT '适用类型 0默认全公司 1用户 2部门',
 -- `user_id` longtext NOT NULL COMMENT '适用用户id',
 -- `dept_id` bigint(20) NOT NULL COMMENT '适用部门id',
 
--- `user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用用户id',
--- `dept_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用部门id',
+-- `user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id',
+-- `dept_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用部门id',
 
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '更新人',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `update_time` datetime DEFAULT NULL COMMENT '更新时间',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
-PRIMARY KEY (`group_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批高级设置及异常处理规则';
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批高级设置及异常处理规则';
 -- 转他人处理的  记录?
 
 CREATE TABLE `un_examine` (
 `id` bigint(20) unsigned NOT NULL COMMENT '审批ID',
 `module_type` bigint(20) NOT NULL COMMENT '1 合同 2 回款 3发票   101 普通审批 102 请假审批 103 出差审批 104 加班审批 105 差旅报销 106 借款申请',
 `type` int(10) unsigned DEFAULT NULL COMMENT '0 默认基础 1默认修改使用中 2自定义',
-`icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '图标',
-`name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '审批名称',
+`icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '图标',
+`name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '审批名称',
 `sort_num` int(11) DEFAULT NULL COMMENT '审批的排序',
 `group_id` bigint(20) DEFAULT NULL COMMENT '所属分组',
 `status` int(11) DEFAULT NULL COMMENT '1 正常 2 停用 3 删除 ',
 --
--- `user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '可见范围（员工）',
--- `dept_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '可见范围（部门）',
+-- `user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '可见范围（员工）',
+-- `dept_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '可见范围（部门）',
 
--- `batch_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '批次ID',
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+-- `batch_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '批次ID',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
-PRIMARY KEY (`id`) USING BTREE,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批表';
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批表';
 
 
 CREATE TABLE `un_examine_task` (
@@ -83,47 +83,47 @@ CREATE TABLE `un_examine_task` (
 
 `examine_type` int(11) DEFAULT NULL COMMENT '审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选',
 
-`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
-`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用角色id',
+`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用角色id',
 
 `examine_flag` int(1) DEFAULT 0 COMMENT '多人情况时候审批的人员审批方式  0默认一个爱一个默认顺序  1一个爱一个无序 2只要有一个',
 
 `end_user_id` bigint(20) DEFAULT NULL COMMENT '上级审批截至人员 配置这个如果没有上级转该人审批 有上级这个配置失效',
 `transfer_flag` int(1) DEFAULT 0 COMMENT '转他人处理flag 默认0 1表示这个是转他人的审批场景 2抄送的邮箱',
 `transfer_task_id` bigint(20) DEFAULT NULL COMMENT '类型是转他人对应的主键',
-`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '抄送的 email',
+`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '抄送的 email',
 
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批任务表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批任务表';
 
 CREATE TABLE `un_examine_condition` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `task_id` bigint(20) NOT NULL COMMENT '关联taskid',
 `parent_id` bigint(20) DEFAULT 0 COMMENT '条件父关联 默认0',
-`deep_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '条件内关联的深度 有序',
-`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '条件的名称',
+`deep_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件内关联的深度 有序',
+`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件的名称',
 
 `module_type` bigint(20) NOT NULL COMMENT '1 合同 2 回款 3发票',
-`module_field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '字段名称',
+`module_field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '字段名称',
 `module_field_search` int(10) unsigned DEFAULT NULL COMMENT '比较条件符号',
-`module_field_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '字段值',
+`module_field_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '字段值',
 
 `examine_task_id` bigint(20) DEFAULT NULL COMMENT '条件内 关联的审批',
 
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批条件表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批条件表';
 
 -- 具体审批记录
 CREATE TABLE `un_examine_record` (
@@ -133,69 +133,69 @@ CREATE TABLE `un_examine_record` (
 `relation_id` bigint(20) DEFAULT NULL COMMENT '关联业务主键ID',
 `status` int(11) DEFAULT NULL COMMENT '记录状态 0 正常 1 终止 2 暂停  3 作废',
 `examine_status` int(11) DEFAULT NULL COMMENT '审核状态 0 未审核 1 审核通过 2 审核拒绝 3 审核中 4 已撤回 6创建',
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审核记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审核记录表';
 
 
-CREATE TABLE `un_examine_record_log` (
+CREATE TABLE `un_examine_record_task` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `task_type` int(11) DEFAULT NULL COMMENT '审批的任务类别 0 普通审批 1 条件审批 2抄送 3转他人处理 4条件内的审批',
 
 `examine_type` int(11) DEFAULT NULL COMMENT '审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选',
 
-`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
-`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '适用角色id',
+`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用角色id',
 
 `examine_flag` int(1) DEFAULT 0 COMMENT '多人情况时候审批的人员审批方式  0默认一个爱一个默认顺序  1一个爱一个无序 2只要有一个',
 
 `end_user_id` bigint(20) DEFAULT NULL COMMENT '上级审批截至人员 配置这个如果没有上级转该人审批 有上级这个配置失效',
 `transfer_flag` int(1) DEFAULT 0 COMMENT '转他人处理flag 默认0 1表示这个是转他人的审批场景 2抄送的邮箱',
 `transfer_task_id` bigint(20) DEFAULT NULL COMMENT '类型是转他人对应的主键',
-`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '抄送的 email',
+`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '抄送的 email',
 
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批任务日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批任务日志表';
 
 
 CREATE TABLE `un_examine_record_condition` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `task_id` bigint(20) NOT NULL COMMENT '关联taskid',
 `parent_id` bigint(20) DEFAULT 0 COMMENT '条件父关联 默认0',
-`deep_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '条件内关联的深度 有序',
-`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '条件的名称',
+`deep_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件内关联的深度 有序',
+`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件的名称',
 
 `module_type` bigint(20) NOT NULL COMMENT '1 合同 2 回款 3发票',
-`module_field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '字段名称',
+`module_field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '字段名称',
 `module_field_search` int(10) unsigned DEFAULT NULL COMMENT '比较条件符号',
-`module_field_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin COMMENT '字段值',
+`module_field_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '字段值',
 
 `examine_task_id` bigint(20) DEFAULT NULL COMMENT '条件内 关联的审批',
 
-`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
 `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
 `company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
 PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批条件表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批条件表';
 
 
 -- CREATE TABLE `un_examine_flow` (
 -- `id` bigint(20) NOT NULL COMMENT '审核流程ID',
--- `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '名称',
+-- `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '名称',
 -- `examine_id` bigint(20) unsigned DEFAULT NULL COMMENT '审批ID',
 -- `examine_type` int(11) NOT NULL COMMENT '0 条件 1 指定成员 2 主管 3 角色 4 发起人自选 5 连续多级主管',
 -- `examine_error_handling` int(11) NOT NULL DEFAULT '1' COMMENT '审批找不到用户或者条件均不满足时怎么处理 1 自动通过 2 管理员审批',
@@ -203,9 +203,12 @@ PRIMARY KEY (`id`) USING BTREE
 -- `sort` int(11) NOT NULL COMMENT '执行顺序，不可为空',
 -- `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 -- `create_user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
--- `batch_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '批次ID',
+-- `batch_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '批次ID',
 -- `company_id` bigint(20) DEFAULT NULL COMMENT '企业ID',
 -- `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 -- `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人ID',
 -- PRIMARY KEY (`flow_id`) USING BTREE,
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='审批流程表';
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批流程表';
+
+
+-- 业务流构建【基于单天线数据，的以一个流程 包含表单以及审批的一个 方程式的业务画面】
