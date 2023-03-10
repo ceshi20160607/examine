@@ -17,13 +17,14 @@ public enum CheckStatusEnum {
     /**
      * 审批 类型枚举
      */
-    CHECK_ING(0, "待审核"),
-    CHECK_PASS(1, "通过"),
-    CHECK_CAMAL(2, "拒绝"),
-    CHECK_ON(3, "审核中"),
-    CHECK_BACK(4, "已撤回"),
-    CHECK_UNPUSH(5, "未提交"),
-    CHECK_DISCARD(8, "已作废")
+    CHECK_CREATE(0,"创建"),
+    CHECK_ING(1, "待审核"),
+    CHECK_PASS(2, "通过"),
+    CHECK_CAMAL(3, "拒绝"),
+    CHECK_ON(4, "审核中"),
+    CHECK_BACK(5, "已撤回"),
+    CHECK_UNPUSH(6, "未提交"),
+    CHECK_DISCARD(7, "已作废")
     ;
 
     CheckStatusEnum(Integer type, String remarks) {
