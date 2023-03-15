@@ -24,6 +24,7 @@
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>2.0.6</knife4j.version>
         <swagger2.version>2.10.5</swagger2.version>
+        <liteflow.version>2.9.7</liteflow.version>
     </properties>
     <dependencies>
         <dependency>
@@ -107,6 +108,13 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
+        </dependency>
+
+        <!--liteflow 流程编排-->
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>liteflow-spring-boot-starter</artifactId>
+            <version>${liteflow.version}</version>
         </dependency>
 
         <!--knife4j-->

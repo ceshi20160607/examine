@@ -18,7 +18,7 @@ import lombok.Setter;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-03-13
+ * @since 2023-03-15
  */
 @Getter
 @Setter
@@ -31,11 +31,8 @@ public class ExamineTemplate implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("关联的task_id")
-    private Long parentId;
-
-    @ApiModelProperty("条件内关联的深度 有序")
-    private String parentDepth;
+    @ApiModelProperty("审批id")
+    private Long examineId;
 
     @ApiModelProperty("审批的任务类别 0 普通审批 1 条件审批 2抄送 3转他人处理 4条件内的审批")
     private Integer taskType;
@@ -43,11 +40,17 @@ public class ExamineTemplate implements Serializable {
     @ApiModelProperty("审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选")
     private Integer examineType;
 
+    @ApiModelProperty("总列的深度")
+    private String conditionColDepth;
+
+    @ApiModelProperty("关联的task_id")
+    private Long conditionParentId;
+
+    @ApiModelProperty("条件内关联的深度 有序")
+    private String conditionParentDepth;
+
     @ApiModelProperty("1 合同 2 回款 3发票")
     private Long conditionModuleType;
-
-    @ApiModelProperty("字段名称")
-    private String conditionModuleSearch;
 
     @ApiModelProperty("条件")
     private String conditionModuleFieldSearch;
@@ -94,10 +97,6 @@ public class ExamineTemplate implements Serializable {
     @ApiModelProperty("修改人")
     @TableField(fill = FieldFill.UPDATE)
     private Long updateUserId;
-
-    @ApiModelProperty("企业id")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long companyId;
 
 
 }

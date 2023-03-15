@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 审批适用用户部门表 前端控制器
+ * 审批任务日志表 前端控制器
  * </p>
  *
  * @author UNIQUE
  * @since 2023-03-15
  */
 @RestController
-@RequestMapping("/examine-setting-user")
-public class ExamineSettingUserController {
+@RequestMapping("/examine-template")
+public class ExamineTemplateController {
 
 }

@@ -149,8 +149,9 @@ CREATE TABLE `un_examine_record_task` (
 
 `examine_type` int(11) DEFAULT NULL COMMENT '审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选',
 
-`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
-`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用角色id',
+`user_id` bigint(20) DEFAULT NULL COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+-- `user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+-- `role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用角色id',
 
 `examine_flag` int(1) DEFAULT 0 COMMENT '多人情况时候审批的人员审批方式  0默认一个爱一个默认顺序  1一个爱一个无序 2只要有一个',
 
@@ -212,3 +213,75 @@ PRIMARY KEY (`id`) USING BTREE
 
 
 -- 业务流构建【基于单天线数据，的以一个流程 包含表单以及审批的一个 方程式的业务画面】
+
+DROP TABLE IF EXISTS `un_examine_record_log`;
+CREATE TABLE `un_examine_record_log` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '条件的名称',
+`record_id` bigint(20) DEFAULT NULL COMMENT '关联的record_id',
+
+`task_type` int(11) DEFAULT NULL COMMENT '审批的任务类别 0 普通审批 1 条件审批 2抄送 3转他人处理 4条件内的审批',
+`examine_type` int(11) DEFAULT NULL COMMENT '审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选',
+
+`task_id` bigint(20) DEFAULT NULL COMMENT '关联的task_id',
+`task_sort` int(11) DEFAULT NULL COMMENT '关联的task总排序',
+
+`condition_parent_id` bigint(20) DEFAULT '0' COMMENT '条件父关联 默认0',
+`condition_module_type` bigint(20) NOT NULL COMMENT '1 合同 2 回款 3发票',
+`condition_module_search` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '字段名称',
+`condition_module_field_search`longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件',
+
+
+`examine_flag` int(1) DEFAULT 0 COMMENT '多人情况时候审批的人员审批方式  0默认一个爱一个默认顺序  1一个爱一个无序 2只要有一个',
+`user_id` bigint(20) DEFAULT NULL COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+`role_id` bigint(20) DEFAULT NULL  COMMENT '适用角色id',
+`status` int(1) DEFAULT NULL COMMENT '审批状态',
+
+`transfer_flag` int(1) DEFAULT 0 COMMENT '转他人处理flag 默认0 1表示这个是转他人的审批场景 2抄送的邮箱',
+`transfer_user_id` bigint(20) DEFAULT NULL COMMENT '类型是转他人对应的主键',
+`transfer_status` int(1) DEFAULT NULL COMMENT '类型是转他人 审批状态',
+
+
+`end_user_id` bigint(20) DEFAULT NULL COMMENT '上级审批截至人员 配置这个如果没有上级转该人审批 有上级这个配置失效',
+`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '抄送的 email',
+
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
+`update_time` datetime DEFAULT NULL COMMENT '修改时间',
+`update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
+`company_id` bigint(20) DEFAULT NULL COMMENT '企业id',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批任务日志表';
+
+
+DROP TABLE IF EXISTS `un_examine_template`;
+CREATE TABLE `un_examine_template` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`examine_id` bigint(20) DEFAULT NULL COMMENT '审批id',
+
+`task_type` int(11) DEFAULT NULL COMMENT '审批的任务类别 0 普通审批 1 条件审批 2抄送 3转他人处理 4条件内的审批',
+`examine_type` int(11) DEFAULT NULL COMMENT '审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选',
+
+`condition_parent_id` bigint(20) DEFAULT NULL COMMENT '关联的task_id',
+`condition_parent_depth` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件内关联的深度 有序',
+`condition_module_type` bigint(20) DEFAULT NULL COMMENT '1 合同 2 回款 3发票',
+`condition_module_field_search` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '条件',
+
+`examine_flag` int(1) DEFAULT '0' COMMENT '多人情况时候审批的人员审批方式  0默认一个爱一个默认顺序  1一个爱一个无序 2只要有一个',
+`user_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用用户id 选择类型是上级时候可以指定某人的上级来处理',
+`role_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '适用角色id',
+
+`transfer_flag` int(1) DEFAULT '0' COMMENT '转他人处理flag 默认0 1表示这个是转他人的审批场景 2抄送的邮箱',
+`transfer_user_id` bigint(20) DEFAULT NULL COMMENT '类型是转他人对应的主键',
+`transfer_status` int(1) DEFAULT NULL COMMENT '类型是转他人 审批状态',
+`end_user_id` bigint(20) DEFAULT NULL COMMENT '上级审批截至人员 配置这个如果没有上级转该人审批 有上级这个配置失效',
+`copy_emails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '抄送的 email',
+
+`remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`create_user_id` bigint(20) DEFAULT NULL COMMENT '创建人',
+`update_time` datetime DEFAULT NULL COMMENT '修改时间',
+`update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='审批任务日志表';

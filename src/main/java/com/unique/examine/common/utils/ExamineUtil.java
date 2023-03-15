@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.unique.examine.common.enums.CheckStatusEnum;
 import com.unique.examine.common.enums.ExamineTypeEnum;
 import com.unique.examine.common.enums.TaskTypeEnum;
-import com.unique.examine.common.liteflow.ExamineContext;
+import com.unique.examine.common.context.ExamineContext;
 import com.unique.examine.entity.bo.ExamineBefore;
 import com.unique.examine.entity.bo.ExamineModel;
 import com.unique.examine.entity.bo.ExamineSearch;
@@ -172,8 +172,19 @@ public class ExamineUtil {
                     examineRecordLogList.add(recordLog5);
                     break;
                 case CC:
+                    ExamineRecordLog recordLog6 = BeanUtil.copyProperties(r,ExamineRecordLog.class);
+                    recordLog6.setStatus(status);
+                    examineRecordLogList.add(recordLog6);
                     break;
                 case TRANSFER:
+                    ExamineRecordLog recordLog7 = BeanUtil.copyProperties(r,ExamineRecordLog.class);
+                    recordLog7.setStatus(status);
+                    if (ObjectUtil.isNotEmpty(fillTemplateGroup.get(r.getId()))){
+                        recordLog7.setTransferFlag(1);
+                        recordLog7.setTransferUserId(fillTemplateGroup.get(r.getId()).get(0).getTransferUserId());
+                        recordLog7.setTransferStatus(CheckStatusEnum.CHECK_ING.getType());
+                    }
+                    examineRecordLogList.add(recordLog7);
                     break;
                 case WITHIN_CONDITIONS:
                     break;

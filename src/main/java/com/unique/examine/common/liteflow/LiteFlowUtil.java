@@ -1,4 +1,4 @@
-package com.unique.examine.common.utils;
+package com.unique.examine.common.liteflow;
 
 /** 基于具体的数据来构建流程
  * @author UNIQUE

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-03-13
+ * @since 2023-03-15
  */
 public interface ExamineRecordLogMapper extends BaseMapper<ExamineRecordLog> {
 

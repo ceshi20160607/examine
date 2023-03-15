@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-02-15
+ * @since 2023-03-15
  */
 public interface IExamineSettingService extends IService<ExamineSetting> {
 
