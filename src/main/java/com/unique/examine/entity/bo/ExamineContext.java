@@ -1,4 +1,4 @@
-package com.unique.examine.common.context;
+package com.unique.examine.entity.bo;
 
 import com.unique.examine.entity.bo.ExamineBefore;
 import com.unique.examine.entity.bo.ExamineModel;

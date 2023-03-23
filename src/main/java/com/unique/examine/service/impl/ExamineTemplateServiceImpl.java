@@ -1,5 +1,6 @@
 package com.unique.examine.service.impl;
 
+import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.entity.po.ExamineTemplate;
 import com.unique.examine.mapper.ExamineTemplateMapper;
 import com.unique.examine.service.IExamineTemplateService;
@@ -17,4 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExamineTemplateServiceImpl extends ServiceImpl<ExamineTemplateMapper, ExamineTemplate> implements IExamineTemplateService {
 
+    @Override
+    public void addOrUpdate(ExamineContext context) {
+
+    }
 }

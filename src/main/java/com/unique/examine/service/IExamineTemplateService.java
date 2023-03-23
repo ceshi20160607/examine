@@ -1,5 +1,6 @@
 package com.unique.examine.service;
 
+import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.entity.po.ExamineTemplate;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IExamineTemplateService extends IService<ExamineTemplate> {
 
+    void addOrUpdate(ExamineContext context);
 }

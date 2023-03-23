@@ -2,8 +2,9 @@ package com.unique.examine.controller;
 
 
 import com.unique.core.common.Result;
-import com.unique.examine.common.context.ExamineContext;
+import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.service.IExamineService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,7 @@ public class ExamineController {
      * @date 2023/3/15
      */
     @PostMapping("/add")
+    @ApiOperation("添加审批")
     public Result add(@RequestBody ExamineContext context){
         iExamineService.addOrUpdate(context);
         return Result.ok();
@@ -46,6 +48,7 @@ public class ExamineController {
      * @date 2023/3/15
      */
     @PostMapping("/process")
+    @ApiOperation("进行审批")
     public Result process(@RequestBody ExamineContext context){
         iExamineService.process(context);
         return Result.ok();

@@ -23,7 +23,7 @@
         <poi.version>4.1.2</poi.version>
         <p6spy.version>3.9.1</p6spy.version>
         <knife4j.version>2.0.6</knife4j.version>
-        <swagger2.version>2.10.5</swagger2.version>
+        <swagger2.version>2.9.2</swagger2.version>
         <liteflow.version>2.9.7</liteflow.version>
     </properties>
     <dependencies>
@@ -117,6 +117,16 @@
             <version>${liteflow.version}</version>
         </dependency>
 
+        <!--Swagger2 - RESTful API文档-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--        </dependency>-->
+        <!--swaggerUI-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
         <!--knife4j-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

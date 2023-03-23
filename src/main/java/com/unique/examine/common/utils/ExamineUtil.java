@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.unique.examine.common.enums.CheckStatusEnum;
 import com.unique.examine.common.enums.ExamineTypeEnum;
 import com.unique.examine.common.enums.TaskTypeEnum;
-import com.unique.examine.common.context.ExamineContext;
+import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.entity.bo.ExamineBefore;
 import com.unique.examine.entity.bo.ExamineModel;
 import com.unique.examine.entity.bo.ExamineSearch;
@@ -186,8 +186,6 @@ public class ExamineUtil {
                     }
                     examineRecordLogList.add(recordLog7);
                     break;
-                case WITHIN_CONDITIONS:
-                    break;
                 default:
             }
         }
@@ -205,10 +203,10 @@ public class ExamineUtil {
                 conditionProcess(context);
                 break;
             case CC:
+                EmailUtil.sendEmailProcess(examineRecordLogList.get(0));
                 break;
             case TRANSFER:
-                break;
-            case WITHIN_CONDITIONS:
+                generalProcess(context);
                 break;
             default:
                 break;

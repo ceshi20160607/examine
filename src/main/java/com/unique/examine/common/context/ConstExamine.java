@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2022/12/28 10:07
  */
 
-public class Const {
+public class ConstExamine {
     /**
      * 默认分隔符
      */

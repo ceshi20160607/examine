@@ -1,6 +1,6 @@
 package com.unique.examine.service;
 
-import com.unique.examine.common.context.ExamineContext;
+import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.entity.po.Examine;
 import com.baomidou.mybatisplus.extension.service.IService;
 
