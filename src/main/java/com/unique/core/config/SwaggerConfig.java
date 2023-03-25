@@ -25,11 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author zhang
+/***
  * swagger配置
+ * @throws
+ * @author UNIQUE
+ * @date 2023/3/25
  */
-
 @Configuration
 @EnableKnife4j
 @EnableSwagger2WebMvc

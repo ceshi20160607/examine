@@ -12,8 +12,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * @author zhangzhiwei
  * 默认分页
+ * @author UNIQUE
+ * @date 2023/3/25
  */
 public class BasePage<T> implements IPage<T> {
 

@@ -1,8 +1,9 @@
 package com.unique.core.common;
 
 /**
- * @author zhangzhiwei
- * 默认响应类，所有返回消息需要继承这个类
+ * 返回消息构建类
+ * @author UNIQUE
+ * @date 2023/3/25
  */
 public interface ResultBaseCode {
 
