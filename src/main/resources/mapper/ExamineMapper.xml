@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generator.mapper.ExamineMapper">
+
+    <resultMap id="BaseResultMap" type="generator.entity.po.Examine">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="moduleType" column="module_type" jdbcType="BIGINT"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="sortNum" column="sort_num" jdbcType="INTEGER"/>
+            <result property="groupId" column="group_id" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createUserId" column="create_user_id" jdbcType="BIGINT"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="updateUserId" column="update_user_id" jdbcType="BIGINT"/>
+            <result property="companyId" column="company_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,module_type,type,
+        icon,name,sort_num,
+        group_id,status,remarks,
+        create_time,create_user_id,update_time,
+        update_user_id,company_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from un_examine
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from un_examine
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="generator.entity.po.Examine" useGeneratedKeys="true">
+        insert into un_examine
+        ( id,module_type,type
+        ,icon,name,sort_num
+        ,group_id,status,remarks
+        ,create_time,create_user_id,update_time
+        ,update_user_id,company_id)
+        values (#{id,jdbcType=BIGINT},#{moduleType,jdbcType=BIGINT},#{type,jdbcType=INTEGER}
+        ,#{icon,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{sortNum,jdbcType=INTEGER}
+        ,#{groupId,jdbcType=BIGINT},#{status,jdbcType=INTEGER},#{remarks,jdbcType=VARCHAR}
+        ,#{createTime,jdbcType=TIMESTAMP},#{createUserId,jdbcType=BIGINT},#{updateTime,jdbcType=TIMESTAMP}
+        ,#{updateUserId,jdbcType=BIGINT},#{companyId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="generator.entity.po.Examine" useGeneratedKeys="true">
+        insert into un_examine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="moduleType != null">module_type,</if>
+                <if test="type != null">type,</if>
+                <if test="icon != null">icon,</if>
+                <if test="name != null">name,</if>
+                <if test="sortNum != null">sort_num,</if>
+                <if test="groupId != null">group_id,</if>
+                <if test="status != null">status,</if>
+                <if test="remarks != null">remarks,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="createUserId != null">create_user_id,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="updateUserId != null">update_user_id,</if>
+                <if test="companyId != null">company_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="moduleType != null">#{moduleType,jdbcType=BIGINT},</if>
+                <if test="type != null">#{type,jdbcType=INTEGER},</if>
+                <if test="icon != null">#{icon,jdbcType=VARCHAR},</if>
+                <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+                <if test="sortNum != null">#{sortNum,jdbcType=INTEGER},</if>
+                <if test="groupId != null">#{groupId,jdbcType=BIGINT},</if>
+                <if test="status != null">#{status,jdbcType=INTEGER},</if>
+                <if test="remarks != null">#{remarks,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="createUserId != null">#{createUserId,jdbcType=BIGINT},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateUserId != null">#{updateUserId,jdbcType=BIGINT},</if>
+                <if test="companyId != null">#{companyId,jdbcType=BIGINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="generator.entity.po.Examine">
+        update un_examine
+        <set>
+                <if test="moduleType != null">
+                    module_type = #{moduleType,jdbcType=BIGINT},
+                </if>
+                <if test="type != null">
+                    type = #{type,jdbcType=INTEGER},
+                </if>
+                <if test="icon != null">
+                    icon = #{icon,jdbcType=VARCHAR},
+                </if>
+                <if test="name != null">
+                    name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="sortNum != null">
+                    sort_num = #{sortNum,jdbcType=INTEGER},
+                </if>
+                <if test="groupId != null">
+                    group_id = #{groupId,jdbcType=BIGINT},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=INTEGER},
+                </if>
+                <if test="remarks != null">
+                    remarks = #{remarks,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createUserId != null">
+                    create_user_id = #{createUserId,jdbcType=BIGINT},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateUserId != null">
+                    update_user_id = #{updateUserId,jdbcType=BIGINT},
+                </if>
+                <if test="companyId != null">
+                    company_id = #{companyId,jdbcType=BIGINT},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="generator.entity.po.Examine">
+        update un_examine
+        set 
+            module_type =  #{moduleType,jdbcType=BIGINT},
+            type =  #{type,jdbcType=INTEGER},
+            icon =  #{icon,jdbcType=VARCHAR},
+            name =  #{name,jdbcType=VARCHAR},
+            sort_num =  #{sortNum,jdbcType=INTEGER},
+            group_id =  #{groupId,jdbcType=BIGINT},
+            status =  #{status,jdbcType=INTEGER},
+            remarks =  #{remarks,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            create_user_id =  #{createUserId,jdbcType=BIGINT},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            update_user_id =  #{updateUserId,jdbcType=BIGINT},
+            company_id =  #{companyId,jdbcType=BIGINT}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>
