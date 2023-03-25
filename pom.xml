@@ -14,6 +14,7 @@
     <name>examine</name>
     <description>examine</description>
     <properties>
+        <sa.version>1.34.0</sa.version>
         <hutool.version>5.7.16</hutool.version>
         <lombok.version>1.18.10</lombok.version>
         <fastjson.version>1.2.83</fastjson.version>
@@ -22,19 +23,72 @@
         <generator.version>3.5.1</generator.version>
         <poi.version>4.1.2</poi.version>
         <p6spy.version>3.9.1</p6spy.version>
-        <knife4j.version>2.0.6</knife4j.version>
-        <swagger2.version>2.9.2</swagger2.version>
+        <knife4j.version>2.0.7</knife4j.version>
+        <swagger2.version>2.10.5</swagger2.version>
         <liteflow.version>2.9.7</liteflow.version>
     </properties>
+
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>central</id>-->
+<!--            <name>阿里云公共仓库</name>-->
+<!--            <url>https://maven.aliyun.com/repository/public</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--        <repository>-->
+<!--            <id>72crm</id>-->
+<!--            <name>72crm</name>-->
+<!--            <url>http://nexus.72crm.com/repository/maven-public/</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
+<!--    <pluginRepositories>-->
+<!--        <pluginRepository>-->
+<!--            <id>central</id>-->
+<!--            <name>阿里云公共仓库</name>-->
+<!--            <url>https://maven.aliyun.com/repository/public</url>-->
+<!--            <snapshots>-->
+<!--                <enabled>true</enabled>-->
+<!--            </snapshots>-->
+<!--        </pluginRepository>-->
+<!--    </pluginRepositories>-->
+
     <dependencies>
+        <!--web依赖包-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- undertow服务-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>${sa.version}</version>
         </dependency>
 
         <!--数据库-->
@@ -117,22 +171,7 @@
             <version>${liteflow.version}</version>
         </dependency>
 
-        <!--Swagger2 - RESTful API文档-->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger2</artifactId>-->
-<!--        </dependency>-->
-        <!--swaggerUI-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-        <!--knife4j-->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
-            <version>${knife4j.version}</version>
-        </dependency>
+
         <!-- springfox 冲突解决 -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -148,6 +187,25 @@
                     <artifactId>swagger-models</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+<!--        &lt;!&ndash;Swagger2 - RESTful API文档&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>${swagger2.version}</version>-->
+<!--        </dependency>-->
+        <!--swaggerUI-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--knife4j-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
         </dependency>
     </dependencies>
 

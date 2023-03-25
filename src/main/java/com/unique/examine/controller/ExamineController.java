@@ -6,11 +6,7 @@ import com.unique.examine.entity.bo.ExamineContext;
 import com.unique.examine.service.IExamineService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -26,6 +22,12 @@ public class ExamineController {
 
     @Autowired
     private IExamineService iExamineService;
+
+    @GetMapping("/test")
+    @ApiOperation("test")
+    public Result test(){
+        return Result.ok();
+    }
 
     /**
      * 添加审核，，审核业务初始化
