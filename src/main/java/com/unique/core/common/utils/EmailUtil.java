@@ -1,4 +1,4 @@
-package com.unique.examine.common.utils;
+package com.unique.core.common.utils;
 
 import cn.hutool.extra.mail.MailUtil;
 import com.unique.examine.entity.po.ExamineRecordLog;

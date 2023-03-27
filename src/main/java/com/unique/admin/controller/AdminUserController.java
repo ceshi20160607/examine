@@ -1,16 +1,26 @@
 package com.unique.admin.controller;
 
 
+import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.session.SaSessionCustomUtil;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
+import com.sun.istack.internal.NotNull;
+import com.unique.admin.common.utils.EncryptUtil;
 import com.unique.admin.entity.po.AdminUser;
 import com.unique.admin.service.IAdminUserService;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
 import com.unique.core.common.bo.SearchBO;
+import com.unique.core.context.Const;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +42,24 @@ public class AdminUserController {
     @PostMapping("/add")
     @ApiOperation("保存数据")
     public Result add(@RequestBody AdminUser adminUser) {
+        EncryptUtil.encryUserPwd(adminUser);
+        adminUser.setStatus(0);
         iAdminUserService.save(adminUser);
+        return Result.ok();
+    }
+
+    @PostMapping("/resetPwd")
+    @ApiOperation("重置数据")
+    public Result update(@RequestParam("userId") @NotNull Long userId, @RequestParam("password") @NotNull String password) {
+
+        long loginIdAsLong = StpUtil.getLoginIdAsLong();
+        AdminUser byId = iAdminUserService.getById(userId);
+        byId.setPassword(password);
+        EncryptUtil.encryUserPwdSalt(byId);
+        iAdminUserService.lambdaUpdate().set(AdminUser::getPassword, byId.getPassword())
+                .set(AdminUser::getUpdateTime, LocalDateTime.now())
+                .set(AdminUser::getUpdateUserId, loginIdAsLong)
+                .eq(AdminUser::getId, loginIdAsLong).update();
         return Result.ok();
     }
 

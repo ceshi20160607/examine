@@ -1,4 +1,4 @@
-package com.unique.examine.common.utils;
+package com.unique.core.common.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateTime;

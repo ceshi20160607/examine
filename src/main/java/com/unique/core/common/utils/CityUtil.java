@@ -1,7 +1,8 @@
-package com.unique.examine.common.utils;
+package com.unique.core.common.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.unique.core.context.ConstCity;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -15,7 +16,6 @@ import java.util.regex.Pattern;
 
 public class CityUtil {
 
-    private static Pattern PEEK_ALL_CHAR = Pattern.compile("\\S+");
     /**
      * 解析地址
      * @param AllAddress 详细地址
@@ -23,8 +23,8 @@ public class CityUtil {
      */
     public static Map<String,String> addressResolution(String AllAddress){
         //有手动空格解析
-        Matcher m= PEEK_ALL_CHAR.matcher(AllAddress);
-        List<String> list=new ArrayList<>();
+        Matcher m = ConstCity.PEEK_ALL_CHAR.matcher(AllAddress);
+        List<String> list = new ArrayList<>();
         while (m.find()){
             list.add(m.group());
         }
@@ -39,9 +39,9 @@ public class CityUtil {
         //省份处理
         String prov=AllAddress.substring(0,2);//截取前2位
         //直辖市4 zxs
-        String arrZXS[]={"北京","天津","上海","重庆"};
+        String[] arrZXS ={"北京","天津","上海","重庆"};
         //省23 sf
-        String arrSF[]={"黑龙","吉林","辽宁","河北","山西","青海","山东","河南","江苏", "安徽","浙江",
+        String[] arrSF ={"黑龙","吉林","辽宁","河北","山西","青海","山东","河南","江苏", "安徽","浙江",
                 "福建","江西","湖南","湖北","广东","台湾", "海南","甘肃","陕西","四川","贵州","云南"
         };
         if (Arrays.asList(arrZXS).contains(prov)){

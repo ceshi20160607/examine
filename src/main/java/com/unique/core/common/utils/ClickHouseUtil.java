@@ -1,4 +1,4 @@
-package com.unique.examine.common.utils;
+package com.unique.core.common.utils;
 
 import com.unique.examine.common.enums.FieldEnum;
 

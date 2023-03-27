@@ -16,9 +16,15 @@ public class Const {
     public static final String PROJECT_VERSION = "0.0.0.1";
 
     /**
-     * 默认分隔符
+     * 默认分隔符,
      */
-    public static final String SEPARATOR =",";
+    public static final String SEPARATOR_COMMA = ",";
+
+    /**
+     * 默认分隔符:
+     */
+    public static final String SEPARATOR_COLON = ":";
+
 
     /**
      * 默认编码
@@ -30,4 +36,5 @@ public class Const {
      */
     public static final List<String> MYSQL_ADDRESS_TO_CLICKHOUSE_SPLIT = Arrays.asList(",",":",";");
 
+    public static final String DEFAULT_SESSION_USER_KEY = "USER:LOGIN:INFO:";
 }

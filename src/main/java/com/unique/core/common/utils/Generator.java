@@ -1,4 +1,4 @@
-package com.unique.examine.common.utils;
+package com.unique.core.common.utils;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
@@ -13,16 +13,15 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class GeneratorCrm {
+public class Generator {
 
-    public static final String GENERATOR_URL="jdbc:mysql://localhost:3306/anji20221229";
-    public static final String GENERATOR_USERNAME="root";
-    public static final String GENERATOR_PASSWORD="password";
-    public static final String GENERATOR_AUTHOR="UNIQUE";
-    public static final String GENERATOR_PACKAGE="com.kakarote.";
-    public static final String GENERATOR_TABLE_PREFIX="wk_";
-    public static final String GENERATOR_LOCAL_PATH="D://download//java//generator";
-//    public static final String GENERATOR_LOCAL_PATH="E://mysnow//open//examine//src//main//java";
+    public static final String GENERATOR_URL = "jdbc:mysql://localhost:3306/unexamine";
+    public static final String GENERATOR_USERNAME = "root";
+    public static final String GENERATOR_PASSWORD = "password";
+    public static final String GENERATOR_AUTHOR = "UNIQUE";
+    public static final String GENERATOR_PACKAGE = "com.unique.admin";
+    //    public static final String GENERATOR_PACKAGE="com.unique.examine";
+    public static final String GENERATOR_LOCAL_PATH = "E://mysnow//open//examine//src//main//java";
 
     public static void main(String[] args) {
         System.out.println("请模块名称：");
@@ -37,8 +36,8 @@ public class GeneratorCrm {
                             .outputDir(GENERATOR_LOCAL_PATH); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent(GENERATOR_PACKAGE+moduleName) // 设置父包名
-                            .entity("entity.PO")
+                    builder.parent(GENERATOR_PACKAGE) // 设置父包名
+                            .entity("entity.po")
 //                            .moduleName("examine") // 设置父包模块名
 //                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, GENERATOR_LOCAL_PATH))// 设置mapperXml生成路径
                     ;
@@ -53,8 +52,8 @@ public class GeneratorCrm {
                     builder
 //                            .addInclude("wk_examine") // 设置需要生成的表名
                             .enableSkipView()
-                            .addTablePrefix(GENERATOR_TABLE_PREFIX)// 设置过滤表前缀
-                            .likeTable(new LikeTable(GENERATOR_TABLE_PREFIX+moduleName, SqlLike.RIGHT))
+                            .addTablePrefix("un_")// 设置过滤表前缀
+                            .likeTable(new LikeTable("un_"+moduleName, SqlLike.RIGHT))
                             .entityBuilder().enableLombok().addTableFills(tableFillList)
                             .controllerBuilder().enableRestStyle()
 //                            .mapperBuilder().superClass("")
