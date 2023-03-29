@@ -1,6 +1,5 @@
 package com.unique.login.controller;
 
-import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollectionUtil;
@@ -26,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class LoginUserController {
 
     @Autowired
     private IAdminUserService iAdminUserService;
@@ -38,8 +37,8 @@ public class UserController {
         List<AdminUser> list = iAdminUserService.lambdaQuery().eq(AdminUser::getUsername, userBO.getUsername()).eq(AdminUser::getStatus, UserStatusEnum.NORMAL.getType()).list();
         if (CollectionUtil.isNotEmpty(list)) {
             AdminUser adminUser = list.get(0);
-            StpUtil.login(adminUser.getId());
             if (EncryptUtil.checkUserPwd(adminUser, userBO.getPassword())) {
+                StpUtil.login(adminUser.getId(), userBO.getDeviceType().getRemarks());
                 SaSession session = StpUtil.getSession();
                 session.set(Const.DEFAULT_SESSION_USER_KEY + adminUser.getId(), adminUser);
                 return Result.ok(StpUtil.getTokenInfo());

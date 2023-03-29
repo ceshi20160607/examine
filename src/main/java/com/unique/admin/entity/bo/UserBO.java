@@ -1,5 +1,7 @@
 package com.unique.admin.entity.bo;
 
+import com.unique.core.common.enums.DeviceTypeEnum;
+import com.unique.core.common.enums.LoginTypeEnum;
 import com.unique.examine.common.enums.FieldEnum;
 import com.unique.examine.common.enums.SearchFieldEnum;
 import lombok.Data;
@@ -29,10 +31,10 @@ public class UserBO implements Serializable {
     /**
      * 值
      */
-    private Integer logintType;
+    private LoginTypeEnum loginType;
 
     /**
      * 模块类型
      */
-    private Integer deviceType;
+    private DeviceTypeEnum deviceType;
 }
