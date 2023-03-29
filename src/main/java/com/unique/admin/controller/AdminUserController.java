@@ -1,12 +1,7 @@
 package com.unique.admin.controller;
 
 
-import cn.dev33.satoken.secure.SaSecureUtil;
-import cn.dev33.satoken.session.SaSession;
-import cn.dev33.satoken.session.SaSessionCustomUtil;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.sun.istack.internal.NotNull;
 import com.unique.admin.common.utils.EncryptUtil;
 import com.unique.admin.entity.po.AdminUser;
@@ -14,7 +9,6 @@ import com.unique.admin.service.IAdminUserService;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
 import com.unique.core.common.bo.SearchBO;
-import com.unique.core.context.Const;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +69,9 @@ public class AdminUserController {
 
     @PostMapping("/queryPageList")
     @ApiOperation("查询列表页数据")
-    public Result<BasePage<Map<String, Object>>> queryPageList(@RequestBody SearchBO search) {
+    public Result<BasePage<List<Map<String, Object>>>> queryPageList(@RequestBody SearchBO search) {
         search.setPageType(1);
-        BasePage<Map<String, Object>> mapBasePage = new BasePage<>();
+        BasePage<List<Map<String, Object>>> mapBasePage = iAdminUserService.queryPageList(search);
         return Result.ok(mapBasePage);
     }
 

@@ -42,7 +42,7 @@ public class BasePage<T> implements IPage<T> {
     /**
      * 排序字段信息
      */
-    private List<OrderItem> orders = new ArrayList<>();
+    private final List<OrderItem> orders = new ArrayList<>();
 
 
     /**
@@ -50,6 +50,27 @@ public class BasePage<T> implements IPage<T> {
      */
     private Object extraData;
 
+    public BasePage() {
+
+    }
+
+    /**
+     * 分页构造函数
+     *
+     * @param current 当前页
+     * @param size    每页显示条数
+     */
+    public BasePage(long current, long size) {
+        this(current, size, 0);
+    }
+
+    public BasePage(long current, long size, long total) {
+        if (current > 1) {
+            this.pageNumber = current;
+        }
+        this.pageSize = size;
+        this.totalRow = total;
+    }
 
     @Override
     public List<OrderItem> orders() {

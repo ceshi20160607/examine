@@ -39,4 +39,8 @@ public class SearchBO  implements Serializable {
     @ApiModelProperty(value = "是否分页，0:不分页 1 分页", allowableValues = "0,1")
     private Integer pageType = 1;
 
+    public <T> BasePage<T> parse() {
+        return new BasePage<>(page, limit);
+    }
+
 }
