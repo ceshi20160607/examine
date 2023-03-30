@@ -2,11 +2,11 @@ package com.unique.admin.service;
 
 import com.unique.admin.entity.po.AdminUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.unique.admin.entity.vo.AdminUserVO;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.bo.SearchBO;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -18,5 +18,5 @@ import java.util.Map;
  */
 public interface IAdminUserService extends IService<AdminUser> {
 
-    BasePage<List<Map<String, Object>>> queryPageList(SearchBO search);
+    BasePage<List<AdminUserVO>> queryPageList(SearchBO search);
 }

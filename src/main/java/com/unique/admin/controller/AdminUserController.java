@@ -2,9 +2,9 @@ package com.unique.admin.controller;
 
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.sun.istack.internal.NotNull;
 import com.unique.admin.common.utils.EncryptUtil;
 import com.unique.admin.entity.po.AdminUser;
+import com.unique.admin.entity.vo.AdminUserVO;
 import com.unique.admin.service.IAdminUserService;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
@@ -44,7 +44,7 @@ public class AdminUserController {
 
     @PostMapping("/resetPwd")
     @ApiOperation("重置数据")
-    public Result update(@RequestParam("userId") @NotNull Long userId, @RequestParam("password") @NotNull String password) {
+    public Result update(@RequestParam("userId")  Long userId, @RequestParam("password")  String password) {
 
         long loginIdAsLong = StpUtil.getLoginIdAsLong();
         AdminUser byId = iAdminUserService.getById(userId);
@@ -69,9 +69,9 @@ public class AdminUserController {
 
     @PostMapping("/queryPageList")
     @ApiOperation("查询列表页数据")
-    public Result<BasePage<List<Map<String, Object>>>> queryPageList(@RequestBody SearchBO search) {
+    public Result<BasePage<List<AdminUserVO>>> queryPageList(@RequestBody SearchBO search) {
         search.setPageType(1);
-        BasePage<List<Map<String, Object>>> mapBasePage = iAdminUserService.queryPageList(search);
+        BasePage<List<AdminUserVO>> mapBasePage = iAdminUserService.queryPageList(search);
         return Result.ok(mapBasePage);
     }
 

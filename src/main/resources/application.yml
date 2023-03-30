@@ -1,17 +1,19 @@
 server:
   port: 8888
 spring:
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
   application:
     name: un
   mvc:
     throw-exception-if-no-handler-found: true
-    pathmatch:
-      matching-strategy: ant_path_matcher
+##    pathmatch:
+##      matching-strategy: ant_path_matcher
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+#    serialization:
+#      write-dates-as-timestamps: false
 ---
 # redis配置
 spring:
@@ -68,7 +70,7 @@ spring:
 ---
 # mapper配置
 mybatis-plus:
-  mapper-locations: classpath:/mapper/xml/*.xml
+  mapper-locations: classpath:xml/*.xml
 ---
 # satoken配置
 sa-token:

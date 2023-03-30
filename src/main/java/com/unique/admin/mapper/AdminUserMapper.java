@@ -2,12 +2,12 @@ package com.unique.admin.mapper;
 
 import com.unique.admin.entity.po.AdminUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.unique.admin.entity.vo.AdminUserVO;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.bo.SearchBO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -19,5 +19,5 @@ import java.util.Map;
  */
 public interface AdminUserMapper extends BaseMapper<AdminUser> {
 
-    BasePage<List<Map<String, Object>>> queryPageList(BasePage<Object> parse, @Param("search") SearchBO search);
+    BasePage<List<AdminUserVO>> queryPageList(BasePage<Object> parse, @Param("search") SearchBO search);
 }

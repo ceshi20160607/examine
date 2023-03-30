@@ -3,11 +3,13 @@ package com.unique.core.config;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.unique.core.context.Const;
 import com.unique.core.enums.SystemCodeEnum;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.*;
@@ -33,7 +35,8 @@ import java.util.List;
  */
 @Configuration
 @EnableKnife4j
-@EnableSwagger2WebMvc
+//@EnableSwagger2WebMvc
+@EnableWebMvc
 public class SwaggerConfig implements WebMvcConfigurer {
 
     @Value("${spring.application.name:core}")
@@ -51,7 +54,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                //.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+//                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 //todo 只扫描带方法注解的
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())

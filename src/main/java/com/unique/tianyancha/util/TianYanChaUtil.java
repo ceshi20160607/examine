@@ -5,13 +5,12 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.Method;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
 import com.unique.tianyancha.entity.TianYanChaResult;
 import com.unique.tianyancha.entity.bo.TianYanChaSearchBO;
 import com.unique.tianyancha.enums.TianYanChaUrlEnum;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -28,8 +27,8 @@ import java.util.Map;
 @Component
 public class TianYanChaUtil {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+//    @Autowired
+//    private ObjectMapper objectMapper;
 
     @Value("${tianyancha.url:http://open.api.tianyancha.com/services}")
     private String baseUrl;
@@ -51,7 +50,8 @@ public class TianYanChaUtil {
         request.header("Authorization", token);
         String result = request.execute().body();
         log.info("请求天眼查返回结果："+result);
-        TianYanChaResult jsonObject = objectMapper.readValue(result, TianYanChaResult.class);
+        TianYanChaResult jsonObject = JSON.parseObject(result, TianYanChaResult.class);
+//        TianYanChaResult jsonObject = objectMapper.readValue(result, TianYanChaResult.class);
         return jsonObject;
     }
 
