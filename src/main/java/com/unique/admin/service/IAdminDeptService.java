@@ -2,6 +2,10 @@ package com.unique.admin.service;
 
 import com.unique.admin.entity.po.AdminDept;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.unique.core.common.BasePage;
+import com.unique.core.common.bo.SearchBO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IAdminDeptService extends IService<AdminDept> {
 
+    BasePage<List<AdminDept>> queryPageList(SearchBO search);
 }
