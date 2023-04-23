@@ -11,6 +11,7 @@ import com.unique.core.common.Result;
 import com.unique.core.common.enums.UserStatusEnum;
 import com.unique.core.context.Const;
 import com.unique.core.enums.SystemCodeEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import java.util.List;
  * @create 2023-03-25
  * @verson 1.0.0
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class LoginUserController {
@@ -41,6 +43,7 @@ public class LoginUserController {
                 StpUtil.login(adminUser.getId(), userBO.getDeviceType().getRemarks());
                 SaSession session = StpUtil.getSession();
                 session.set(Const.DEFAULT_SESSION_USER_KEY + adminUser.getId(), adminUser);
+                log.info("****:"+StpUtil.getTokenInfo().toString());
                 return Result.ok(StpUtil.getTokenInfo());
             }
         }

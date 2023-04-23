@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.IFill;
+import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.po.LikeTable;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,6 +24,8 @@ public class Generator {
     public static final String GENERATOR_PACKAGE = "com.unique.admin";
     //    public static final String GENERATOR_PACKAGE="com.unique.examine";
     public static final String GENERATOR_LOCAL_PATH = "E://mysnow//open//examine//src//main//java";
+//    public static final String GENERATOR_LOCAL_PATH = "E://mysnow//open//examine//src//main//java";
+    public static final String GENERATOR_LOCAL_XML_PATH = "E://mysnow//open//examine//src//main//resources//xml";
 
     public static void main(String[] args) {
         System.out.println("请模块名称：");
@@ -39,7 +43,7 @@ public class Generator {
                     builder.parent(GENERATOR_PACKAGE) // 设置父包名
                             .entity("entity.po")
 //                            .moduleName("examine") // 设置父包模块名
-//                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, GENERATOR_LOCAL_PATH))// 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, GENERATOR_LOCAL_XML_PATH))// 设置mapperXml生成路径
                     ;
                 })
                 .strategyConfig(builder -> {
