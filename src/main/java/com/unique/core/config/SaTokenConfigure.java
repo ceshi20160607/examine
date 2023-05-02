@@ -52,8 +52,12 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     // 注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 注册 Sa-Token 拦截器，校验规则为 StpUtil.checkLogin() 登录校验。
-        registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
+        System.out.println("--------- flag 1");
+        registry.addInterceptor(new SaInterceptor(handle -> {
+                    System.out.println("--------- flag 2，请求进入了拦截器，访问的 path 是：" + SaHolder.getRequest().getRequestPath());
+                    StpUtil.checkLogin();  // 登录校验，只有会话登录后才能通过这句代码
+                }))
+//                .addPathPatterns("/user/**")
                 .addPathPatterns("/**")
                 .excludePathPatterns("/user/doLogin");
     }
@@ -154,14 +158,14 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 //                    // 拦截与排除 path
 //                .addInclude("/**")
 //                .addExclude("/favicon.ico","/user/doLogin")
-////                    // 全局认证函数
-////                .setAuth(obj -> {
-////                    System.out.println("---------- 进入Sa-Token全局认证 -----------");
-////
-////                    // 登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
-////                    SaRouter.match("/**", "/user/doLogin", () -> StpUtil.checkLogin());
-////                    // 更多拦截处理方式，请参考“路由拦截式鉴权”章节 */
-////                })
+//                    // 全局认证函数
+//                .setAuth(obj -> {
+//                    System.out.println("---------- 进入Sa-Token全局认证 -----------");
+//
+//                    // 登录认证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
+//                    SaRouter.match("/**", "/user/doLogin", () -> StpUtil.checkLogin());
+//                    // 更多拦截处理方式，请参考“路由拦截式鉴权”章节 */
+//                })
 ////
 ////                // 异常处理函数
 ////                .setError(e -> {

@@ -21,7 +21,7 @@ spring:
     # Redis数据库索引（默认为0）
     database: 7
     # Redis服务器地址
-    host: 127.0.0.1
+    host: localhost
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
@@ -53,8 +53,8 @@ spring:
       datasource:
         #默认的bi配置
         default:
-          url: jdbc:mysql://localhost:3306/unexamine?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
-          username: root
+          url: jdbc:mysql://8.142.109.85:3306/unexamine?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
+          username: un
           password: password
 #        #自定义仪表盘设置
 #        setting:
