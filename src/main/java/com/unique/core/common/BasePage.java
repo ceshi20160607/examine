@@ -2,6 +2,9 @@ package com.unique.core.common;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.unique.core.config.SaTokenConfigure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +62,7 @@ public class BasePage<T> implements IPage<T> {
         this(current, size, 0);
     }
 
+
     public BasePage(long current, long size, long total) {
         if (current > 1) {
             this.pageNumber = current;
@@ -69,39 +73,82 @@ public class BasePage<T> implements IPage<T> {
 
 
     @Override
+    @JsonIgnore
+    public List<T> getRecords() {
+        return this.list;
+    }
+
+    public List<T> getList() {
+        return this.list;
+    }
+
+    @JsonSerialize(using = SaTokenConfigure.NumberSerializer.class)
+    public Long getTotalRow() {
+        return this.totalRow;
+    }
+
+    @JsonSerialize(using = SaTokenConfigure.NumberSerializer.class)
+    public Long getTotalPage() {
+        if (getSize() == 0) {
+            return 0L;
+        }
+        long pages = getTotal() / getSize();
+        if (getTotal() % getSize() != 0) {
+            pages++;
+        }
+        return pages;
+    }
+
+    @JsonSerialize(using = SaTokenConfigure.NumberSerializer.class)
+    public Long getPageSize() {
+        return this.pageSize;
+    }
+
+    @JsonSerialize(using = SaTokenConfigure.NumberSerializer.class)
+    public Long getPageNumber() {
+        return this.pageNumber;
+    }
+
+
+    public void setPageNumber(long pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
+    }
+
+    @Override
     public List<OrderItem> orders() {
         return orders;
     }
 
     @Override
-    public List<T> getRecords() {
-        return this.list;
-    }
-
-    @Override
-    public IPage<T> setRecords(List<T> records) {
-        this.list=records;
+    public BasePage<T> setRecords(List<T> records) {
+        this.list = records;
         return this;
     }
 
     @Override
+    @JsonIgnore
     public long getTotal() {
         return this.totalRow;
     }
 
     @Override
-    public IPage<T> setTotal(long total) {
+    public BasePage<T> setTotal(long total) {
         this.totalRow = total;
         return this;
     }
 
     @Override
+    @JsonIgnore
     public long getSize() {
         return this.pageSize;
     }
 
     @Override
-    public IPage<T> setSize(long size) {
+    public BasePage<T> setSize(long size) {
         this.pageSize = size;
         return this;
     }
@@ -112,7 +159,7 @@ public class BasePage<T> implements IPage<T> {
     }
 
     @Override
-    public IPage<T> setCurrent(long current) {
+    public BasePage<T> setCurrent(long current) {
         this.pageNumber = current;
         return this;
     }

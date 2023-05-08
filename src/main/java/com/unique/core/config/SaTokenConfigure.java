@@ -9,10 +9,9 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -146,6 +145,20 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 return DateUtil.parse(text);
             }
             return null;
+        }
+    }
+
+    /**
+     * 自定义long序列化，因为默认情况下long类型都序列化成string,在需要long类型数据时使用
+     * 将注解加到bean属性上即可
+     *
+     * @JsonSerialize(using = WebConfig.NumberSerializer.class)
+     */
+    public static class NumberSerializer extends JsonSerializer<Long> {
+
+        @Override
+        public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeNumber(value);
         }
     }
 
