@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unique.note.mapper.NoteCarMapper">
+
+    <select id="queryList" resultType="com.unique.note.entity.vo.NoteCarVo">
+        select * from un_note_car
+        where 1=1
+        <if test="search.startTime !=null">
+            create_time >#{search.startTime}
+        </if>
+        <if test="search.endTime !=null">
+            create_time >#{search.endTime}
+        </if>
+        order by update_time desc
+    </select>
+</mapper>
