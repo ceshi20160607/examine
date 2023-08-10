@@ -4,6 +4,7 @@ package com.unique.note.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
+import com.unique.note.entity.bo.FillBo;
 import com.unique.note.entity.bo.NoteSearchBo;
 import com.unique.note.entity.po.NoteCar;
 import com.unique.note.entity.vo.NoteCarVo;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -26,6 +29,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/note-lotto")
 public class NoteLottoController {
+
+    @PostMapping("/fill")
+    @ApiOperation("fill数据")
+    public Result fill(@RequestBody FillBo fillBo) {
+        Map<Integer, List<Integer>> collect = fillBo.getFillList().stream().collect(Collectors.groupingBy(Integer::new));
+        return Result.ok(collect);
+    }
 
 //    @Autowired
 //    private INoteCarService iNoteCarService;
