@@ -14,7 +14,6 @@ CREATE TABLE `un_field` (
                             `hidden_flag` int(11) NOT NULL DEFAULT '0' COMMENT '是否隐藏  0不隐藏 1隐藏',
                             `sorting` int(11) DEFAULT '1' COMMENT '排序 从小到大',
                             `options` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '如果类型是选项，此处不能为空，多个选项以，隔开',
-                            `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
                             `field_type` int(11) NOT NULL DEFAULT '0' COMMENT '字段来源  0.自定义 1.原始固定 2原始字段但值存在扩展表中',
                             `relevant` int(11) DEFAULT NULL COMMENT '只有线索需要，转换客户的自定义字段ID',
                             `style_percent` int(11) DEFAULT '50' COMMENT '样式百分比%',
@@ -26,6 +25,11 @@ CREATE TABLE `un_field` (
                             `index_flag` int(11) DEFAULT '0' COMMENT '是否列表显示 1 是 0 否',
                             `add_flag` int(11) DEFAULT '0' COMMENT '是否新建显示 1 是 0 否',
                             `detail_flag` int(11) DEFAULT '0' COMMENT '是否详情显示 1 是 0 否',
+
+                            `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                            `create_user_id` bigint(20) NOT NULL COMMENT '创建人ID',
+                            `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                            `update_user_id` bigint(20) DEFAULT NULL COMMENT '修改人ID',
 
                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='自定义字段表';
