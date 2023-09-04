@@ -1,9 +1,8 @@
 package com.unique.admin.entity.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.unique.core.common.enums.DeviceTypeEnum;
 import com.unique.core.common.enums.LoginTypeEnum;
-import com.unique.examine.common.enums.FieldEnum;
-import com.unique.examine.common.enums.SearchFieldEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,9 +14,8 @@ import java.io.Serializable;
  * @date 2023/3/27
  */
 @Data
-public class UserBO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@JsonIgnoreProperties(ignoreUnknown = true)//jackson忽略参数
+public class UserBO {
 
     /**
      * 名称

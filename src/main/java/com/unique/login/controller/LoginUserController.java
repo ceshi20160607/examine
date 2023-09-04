@@ -13,9 +13,7 @@ import com.unique.core.context.Const;
 import com.unique.core.enums.SystemCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class LoginUserController {
     private IAdminUserService iAdminUserService;
 
 
-    @RequestMapping("doLogin")
+    @PostMapping("doLogin")
     public Result doLogin(@RequestBody UserBO userBO) {
         // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对
         List<AdminUser> list = iAdminUserService.lambdaQuery().eq(AdminUser::getUsername, userBO.getUsername()).eq(AdminUser::getStatus, UserStatusEnum.NORMAL.getType()).list();
@@ -50,13 +48,13 @@ public class LoginUserController {
         return Result.error(SystemCodeEnum.SYSTEM_NOT_LOGIN);
     }
 
-    @RequestMapping("isLogin")
+    @GetMapping("isLogin")
     public Result isLogin() {
         return Result.ok("是否登录：" + StpUtil.isLogin());
     }
 
 
-    @RequestMapping("logout")
+    @GetMapping("logout")
     public Result logout() {
         StpUtil.logout();
         return Result.ok();

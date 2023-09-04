@@ -4,7 +4,10 @@ import com.unique.core.common.BasePage;
 import com.unique.note.entity.bo.NoteSearchBo;
 import com.unique.note.entity.po.NoteCar;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.unique.note.entity.vo.FieldVo;
 import com.unique.note.entity.vo.NoteCarVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,6 @@ import com.unique.note.entity.vo.NoteCarVo;
 public interface INoteCarService extends IService<NoteCar> {
 
     BasePage<NoteCarVo> queryList(NoteSearchBo searchBo);
+
+    List<FieldVo> queryInformation(Long id);
 }

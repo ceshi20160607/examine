@@ -5,12 +5,13 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.Method;
-import com.alibaba.fastjson.JSON;
-import com.unique.tianyancha.entity.TianYanChaResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.unique.tianyancha.config.TianYanChaResult;
 import com.unique.tianyancha.entity.bo.TianYanChaSearchBO;
 import com.unique.tianyancha.enums.TianYanChaUrlEnum;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -27,12 +28,12 @@ import java.util.Map;
 @Component
 public class TianYanChaUtil {
 
-//    @Autowired
-//    private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    @Value("${tianyancha.url:http://open.api.tianyancha.com/services}")
+    @Value("${tianyancha.url}")
     private String baseUrl;
-    @Value("${tianyancha.token:444444444444}")
+    @Value("${tianyancha.token}")
     private String token;
 
     public static final List<String> SEARCH_NO_PARAM = Arrays.asList("label","groupId","customerId","updateFlag","loopFlag","groupId","url","name");
@@ -50,8 +51,7 @@ public class TianYanChaUtil {
         request.header("Authorization", token);
         String result = request.execute().body();
         log.info("请求天眼查返回结果："+result);
-        TianYanChaResult jsonObject = JSON.parseObject(result, TianYanChaResult.class);
-//        TianYanChaResult jsonObject = objectMapper.readValue(result, TianYanChaResult.class);
+        TianYanChaResult jsonObject = objectMapper.readValue(result, TianYanChaResult.class);
         return jsonObject;
     }
 
@@ -59,13 +59,19 @@ public class TianYanChaUtil {
         StringBuffer sb = new StringBuffer().append(baseUrl).append(searchBO.getUrl());
         Map<String, Object> searchMap = BeanUtil.beanToMap(searchBO);
         StringBuffer sbp = new StringBuffer();
-        searchMap.forEach((k,v)->{
+        int i=0;
+        for (String k : searchMap.keySet()) {
             if (!SEARCH_NO_PARAM.contains(k)) {
+                Object v = searchMap.get(k);
                 if (ObjectUtil.isNotEmpty(v)) {
+                    if (i!=0) {
+                        sbp.append("&");
+                    }
                     sbp.append(k).append("=").append(v);
+                    i++;
                 }
             }
-        });
+        }
         if (sbp.length()>0) {
             sb.append("?").append(URLUtil.encode(sbp.toString()));
         }

@@ -1,4 +1,4 @@
-package com.unique.tianyancha.entity;
+package com.unique.tianyancha.config;
 
 import com.alibaba.fastjson.JSON;
 import com.unique.core.common.ResultBaseCode;

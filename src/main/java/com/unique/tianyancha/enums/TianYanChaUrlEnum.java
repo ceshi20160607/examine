@@ -65,14 +65,14 @@ public enum TianYanChaUrlEnum {
     IC_HUMANHOLDING(55,"最终受益人","/open/ic/humanholding/2.0",6L),
     COMPANYHOLDING(56,"实际控制权","/v4/open/companyholding",6L),
     IC_ACTUAL_CONTROL(57,"疑似实际控制人","/open/ic/actualControl/3.0",6L),
-    RELA_SHORT_PATH(58,"最短路径发现","/open/rela/shortPath",6L),
+    RELA_SHORT_PATH(58,"最短路径发现","/open/rela/shortPath/2.0",6L),
     GROUP_BASE(59,"所属集团查询","/open/group/base",7L),
     GROUP_BASE_DETAILS_BASE(60,"集团详细信息","/open/group/base/details/zhenghe",7L),
     GROUP_MEMBER_BASE(61,"集团成员","/open/group/member/zhenghe",7L),
     GROUP_INVESTORS_BASE(62,"集团对外投资","/open/group/investors/zhenghe",7L),
-    GROUP_INVESTOR_MEMBER_BASE(63,"集团内参与投资该企业的成员列表","/open/group/investorMember/zhenghe",7L),
+    GROUP_INVESTOR_MEMBER(63,"集团内参与投资该企业的成员列表","/open/group/investorMember",7L),
     GROUP_SHAREHOLDERS_BASE(64,"集团投资方","/open/group/shareholders/zhenghe",7L),
-    GROUP_SHAREHOLDERS_MEMBER_BASE(65,"集团内被该投资方投资的成员列表","/open/group/shareholdersMember/zhenghe",7L),
+    GROUP_SHAREHOLDERS_MEMBER(65,"集团内被该投资方投资的成员列表","/open/group/shareholdersMember",7L),
     HUMAN_ZHIXINGINFO_BASE(66,"被执行人（人员）","/v4/open/human/zhixinginfo/zhenghe",8L),
     HUMAN_CONSUMPTION_RESTRICTION_BASE(67,"限制消费令（人员）","/v4/open/human/consumptionRestriction/zhenghe",8L),
     HUMAN_JUDICIAL_ASSISTANCE_BASE(68,"司法协助（人员）","/v4/open/human/judicialAssistance/zhenghe",8L),
@@ -83,7 +83,7 @@ public enum TianYanChaUrlEnum {
 
 
     //前置数据获取
-    JR_LAW_SULT_LIST(1001,"法律诉讼","open/jr/lawSuit/3.0",9L),
+    JR_LAW_SULT_LIST(1001,"法律诉讼","/open/jr/lawSuit/3.0",9L),
     JR_LAW_SULT_DETAIL(1002,"法律诉讼详情","/open/jr/lawSuit/detail",9L),
 
     GET_JUDICIA_LIST(1003,"司法协助","/v4/open/judicial",9L),

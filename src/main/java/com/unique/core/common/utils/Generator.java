@@ -17,14 +17,18 @@ import java.util.Scanner;
 
 public class Generator {
 
-    public static final String GENERATOR_URL = "jdbc:mysql://localhost:3306/unexamine";
-    public static final String GENERATOR_USERNAME = "root";
+    public static final String GENERATOR_URL = "jdbc:mysql://8.142.109.85:3306/unexamine";
+    public static final String GENERATOR_USERNAME = "un";
     public static final String GENERATOR_PASSWORD = "password";
     public static final String GENERATOR_AUTHOR = "UNIQUE";
-    public static final String GENERATOR_PACKAGE = "com.unique.admin";
-    //    public static final String GENERATOR_PACKAGE="com.unique.examine";
+    public static final String GENERATOR_PACKAGE = "com.unique.field";
     public static final String GENERATOR_LOCAL_PATH = "E://mysnow//open//examine//src//main//java";
+
+
+//    public static final String GENERATOR_PACKAGE = "com.unique.admin";
+    //    public static final String GENERATOR_PACKAGE="com.unique.examine";
 //    public static final String GENERATOR_LOCAL_PATH = "E://mysnow//open//examine//src//main//java";
+
     public static final String GENERATOR_LOCAL_XML_PATH = "E://mysnow//open//examine//src//main//resources//xml";
 
     public static void main(String[] args) {

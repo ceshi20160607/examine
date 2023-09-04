@@ -8,36 +8,36 @@ import com.unique.core.common.ResultBaseCode;
  *
  * @author UNIQUE
  */
-public class ExamineException extends RuntimeException implements ResultBaseCode {
+public class BaseException extends RuntimeException implements ResultBaseCode {
 
     private String msg;
     private int code;
 
 
-    public ExamineException(int code, String msg) {
+    public BaseException(int code, String msg) {
         super(code + ":" + msg, null, true, true);
         this.code = code;
         this.msg = msg;
     }
 
-    public ExamineException(ResultBaseCode ResultBaseCode) {
+    public BaseException(ResultBaseCode ResultBaseCode) {
         this(ResultBaseCode.getCode(), ResultBaseCode.getMsg());
     }
 
-    public ExamineException(ResultBaseCode ResultBaseCode, Object... args) {
+    public BaseException(ResultBaseCode ResultBaseCode, Object... args) {
         this(ResultBaseCode.getCode(), String.format(ResultBaseCode.getMsg(), args));
     }
 
-    public ExamineException(ResultBaseCode ResultBaseCode, String str, Boolean flag) {
+    public BaseException(ResultBaseCode ResultBaseCode, String str, Boolean flag) {
         this(ResultBaseCode.getCode(), ResultBaseCode.getMsg() + ":" + str);
     }
 
-    public ExamineException(ResultBaseCode ResultBaseCode, Throwable t) {
+    public BaseException(ResultBaseCode ResultBaseCode, Throwable t) {
 
         this(ResultBaseCode.getCode(), ResultBaseCode.getMsg(), t);
     }
 
-    public ExamineException(int code, String msg, Throwable t) {
+    public BaseException(int code, String msg, Throwable t) {
         super(code + ":" + msg, t, true, true);
         this.code = code;
         this.msg = msg;

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@TableName("wk_crm_tianyancha")
+@TableName("wk_third_tianyancha")
 @ApiModel(value = "CrmTianyancha对象", description = "天眼查记录表")
 public class CrmTianyancha implements Serializable {
 

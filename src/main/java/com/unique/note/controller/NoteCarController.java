@@ -9,6 +9,7 @@ import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
 import com.unique.note.entity.bo.NoteSearchBo;
 import com.unique.note.entity.po.NoteCar;
+import com.unique.note.entity.vo.FieldVo;
 import com.unique.note.entity.vo.NoteCarVo;
 import com.unique.note.service.INoteCarService;
 import io.swagger.annotations.ApiOperation;
@@ -55,11 +56,17 @@ public class NoteCarController {
         return Result.ok(carBasePage);
     }
 
-    @PostMapping("/queryById")
+    @GetMapping("/queryById")
     @ApiOperation("根据ID查询")
     public Result<NoteCarVo> queryById(@RequestParam("id") @ApiParam(name = "id", value = "id") Long id) {
         NoteCar car = iNoteCarService.getById(id);
         return Result.ok(BeanUtil.copyProperties(car,NoteCarVo.class));
+    }
+    @PostMapping("/queryInformation")
+    @ApiOperation("根据ID查询")
+    public Result<List<FieldVo>> queryInformation(@RequestParam("id") @ApiParam(name = "id", value = "id") Long id) {
+        List<FieldVo> ret = iNoteCarService.queryInformation(id);
+        return Result.ok(ret);
     }
 
     @PostMapping("/deleteById")
