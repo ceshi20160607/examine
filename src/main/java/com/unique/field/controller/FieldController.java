@@ -31,9 +31,9 @@ public class FieldController {
     private IFieldService iFieldService;
 
 
-    @GetMapping("/queryField/{type}")
+    @GetMapping("/queryField")
     @ApiOperation("根据ID查询")
-    public Result<List<Field>> queryField(@PathVariable("type") Long type) {
+    public Result<List<Field>> queryField(@RequestParam("type") @ApiParam(name = "type", value = "type")  Long type) {
         List<Field> fieldList = iFieldService.lambdaQuery().eq(Field::getModuleType, type).list();
         return Result.ok(fieldList);
     }
