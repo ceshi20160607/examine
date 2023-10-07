@@ -41,6 +41,7 @@ CREATE TABLE `un_flow_field`  (
 `id` bigint(20) NOT NULL COMMENT 'id',
 `flow_id` bigint(20) NOT NULL COMMENT '流程ID',
 
+`field_id` bigint(20) NOT NULL COMMENT '''自定义字段ID',
 `field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '自定义字段英文标识',
 `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '字段名称',
 `type` int NOT NULL DEFAULT '1' COMMENT '字段类型 1 单行文本 2 多行文本 3 单选 4日期 5 数字 6 小数 7 手机  8 文件 9 多选 10 人员 11 附件 12 部门 13 日期时间 14 邮箱 15客户 16 商机 17 联系人 18 地图 19 产品类型 20 合同 21 回款计划',
@@ -81,6 +82,7 @@ CREATE TABLE `un_flow_field_log`  (
 `id` bigint(20) NOT NULL COMMENT 'id',
 `flow_id` bigint(20) NOT NULL COMMENT '流程ID',
 
+`field_id` bigint(20) NOT NULL COMMENT '''自定义字段ID',
 `field_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '自定义字段英文标识',
 `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '字段名称',
 `type` int NOT NULL DEFAULT '1' COMMENT '字段类型 1 单行文本 2 多行文本 3 单选 4日期 5 数字 6 小数 7 手机  8 文件 9 多选 10 人员 11 附件 12 部门 13 日期时间 14 邮箱 15客户 16 商机 17 联系人 18 地图 19 产品类型 20 合同 21 回款计划',

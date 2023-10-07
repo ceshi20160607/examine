@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-07-12
+ * @since 2023-10-07
  */
 public interface FlowMapper extends BaseMapper<Flow> {
 
