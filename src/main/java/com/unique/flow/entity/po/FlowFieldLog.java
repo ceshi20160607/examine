@@ -16,7 +16,7 @@ import lombok.Setter;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-07-12
+ * @since 2023-10-07
  */
 @Getter
 @Setter
@@ -31,6 +31,9 @@ public class FlowFieldLog implements Serializable {
 
     @ApiModelProperty("流程ID")
     private Long flowId;
+
+    @ApiModelProperty("自定义字段id")
+    private Long fieldId;
 
     @ApiModelProperty("自定义字段英文标识")
     private String fieldName;
