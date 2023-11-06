@@ -1,20 +1,10 @@
-package com.kakarote.crm.common.swaggerparams;
+package com.unique.javassist.swaggerparams;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.DynaBean;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.classmate.TypeResolver;
-import com.kakarote.core.common.enums.CrmEnum;
-import com.kakarote.core.common.enums.FieldEnum;
-import com.kakarote.core.servlet.ApplicationContextHolder;
-import com.kakarote.core.utils.UserUtil;
-import com.kakarote.crm.entity.PO.CrmContacts;
-import com.kakarote.crm.entity.PO.CrmCustomerSuperior;
-import com.kakarote.crm.entity.PO.CrmFieldSort;
-import com.kakarote.crm.entity.PO.CrmProduct;
-import com.kakarote.crm.entity.VO.CrmModelFiledVO;
-import com.kakarote.crm.service.impl.CrmFieldSortServiceImpl;
 import io.swagger.annotations.ApiModelProperty;
 import javassist.*;
 import javassist.bytecode.AnnotationsAttribute;
@@ -115,23 +105,23 @@ public class ApiParamsModelBuilder implements ParameterBuilderPlugin {
      * @throws CannotCompileException
      */
     private Class createItemModel(Integer label, CtClass entityClass) throws NotFoundException, CannotCompileException {
-        List<CrmFieldSort> allFieldSortList = ApplicationContextHolder.getBean(CrmFieldSortServiceImpl.class).queryAllFieldSortList(label, UserUtil.getUserId());
-        for (CrmFieldSort crmFieldSort : allFieldSortList) {
-            CtField field = new CtField(turnCrmFieldToCtClass(crmFieldSort.getType()), crmFieldSort.getFieldName(), entityClass);
-            field.setModifiers(Modifier.PUBLIC);
-            //配置属性
-            ConstPool constPool = entityClass.getClassFile().getConstPool();
-            AnnotationsAttribute attr = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
-            javassist.bytecode.annotation.Annotation annotation = new javassist.bytecode.annotation.Annotation(ApiModelProperty.class.getName(), constPool);
-            annotation.addMemberValue(JAVASSIST_ANNOTATION_KEY_VALUE, new StringMemberValue(crmFieldSort.getName(), constPool));
-            if (crmFieldSort.getIsNull().equals(1)) {
-                annotation.addMemberValue(JAVASSIST_ANNOTATION_KEY_REQUIRED, new BooleanMemberValue(Boolean.TRUE, constPool));
-            }
-            attr.addAnnotation(annotation);
-            field.getFieldInfo().addAttribute(attr);
-
-            entityClass.addField(field);
-        }
+//        List<CrmFieldSort> allFieldSortList = ApplicationContextHolder.getBean(CrmFieldSortServiceImpl.class).queryAllFieldSortList(label, UserUtil.getUserId());
+//        for (CrmFieldSort crmFieldSort : allFieldSortList) {
+//            CtField field = new CtField(turnCrmFieldToCtClass(crmFieldSort.getType()), crmFieldSort.getFieldName(), entityClass);
+//            field.setModifiers(Modifier.PUBLIC);
+//            //配置属性
+//            ConstPool constPool = entityClass.getClassFile().getConstPool();
+//            AnnotationsAttribute attr = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+//            javassist.bytecode.annotation.Annotation annotation = new javassist.bytecode.annotation.Annotation(ApiModelProperty.class.getName(), constPool);
+//            annotation.addMemberValue(JAVASSIST_ANNOTATION_KEY_VALUE, new StringMemberValue(crmFieldSort.getName(), constPool));
+//            if (crmFieldSort.getIsNull().equals(1)) {
+//                annotation.addMemberValue(JAVASSIST_ANNOTATION_KEY_REQUIRED, new BooleanMemberValue(Boolean.TRUE, constPool));
+//            }
+//            attr.addAnnotation(annotation);
+//            field.getFieldInfo().addAttribute(attr);
+//
+//            entityClass.addField(field);
+//        }
         return entityClass.toClass();
     }
 
@@ -147,23 +137,23 @@ public class ApiParamsModelBuilder implements ParameterBuilderPlugin {
      * @throws ClassNotFoundException
      */
     private Class createCumtomModel(CtClass globalCtClass, CtClass baseclass, CtClass entityClass) throws NotFoundException, CannotCompileException, ClassNotFoundException {
-        List<CtField> allField = getAllFields(globalCtClass);
-        for (CtField ctField : allField) {
-            String name = ctField.getName();
-            CtClass item = ctField.getType();
-            if (CRM_FIELD_NAME_KEY_ENTITY.equals(name)) {
-                item = entityClass;
-            } else if (CRM_FIELD_NAME_KEY_FIELD.equals(name)) {
-                com.kakarote.crm.entity.VO.CrmModelFiledVO[] field = {new CrmModelFiledVO()};
-                item = ClassPool.getDefault().getCtClass(field.getClass().getName());
-            }
-            CtField oldfield = new CtField(item, name, baseclass);
-            oldfield.setModifiers(Modifier.PUBLIC);
-            baseclass.addField(oldfield);
-        }
-        CtField shuzu = new CtField(ClassPool.getDefault().get("java.util.List"), "shuzu", baseclass);
-        shuzu.setModifiers(Modifier.PUBLIC);
-        baseclass.addField(shuzu);
+//        List<CtField> allField = getAllFields(globalCtClass);
+//        for (CtField ctField : allField) {
+//            String name = ctField.getName();
+//            CtClass item = ctField.getType();
+//            if (CRM_FIELD_NAME_KEY_ENTITY.equals(name)) {
+//                item = entityClass;
+//            } else if (CRM_FIELD_NAME_KEY_FIELD.equals(name)) {
+//                CrmModelFiledVO[] field = {new CrmModelFiledVO()};
+//                item = ClassPool.getDefault().getCtClass(field.getClass().getName());
+//            }
+//            CtField oldfield = new CtField(item, name, baseclass);
+//            oldfield.setModifiers(Modifier.PUBLIC);
+//            baseclass.addField(oldfield);
+//        }
+//        CtField shuzu = new CtField(ClassPool.getDefault().get("java.util.List"), "shuzu", baseclass);
+//        shuzu.setModifiers(Modifier.PUBLIC);
+//        baseclass.addField(shuzu);
         return baseclass.toClass();
     }
 
@@ -192,15 +182,15 @@ public class ApiParamsModelBuilder implements ParameterBuilderPlugin {
      */
     private CtClass turnCrmFieldToCtClass(Integer fieldType) throws NotFoundException {
         String s = "java.lang.String";
-        switch (FieldEnum.parse(fieldType)) {
-            case NUMBER:
-                s = "int";
-                break;
-            case FLOATNUMBER:
-                s = "double";
-                break;
-            default:
-        }
+//        switch (FieldEnum.parse(fieldType)) {
+//            case NUMBER:
+//                s = "int";
+//                break;
+//            case FLOATNUMBER:
+//                s = "double";
+//                break;
+//            default:
+//        }
         return ClassPool.getDefault().get(s);
     }
 

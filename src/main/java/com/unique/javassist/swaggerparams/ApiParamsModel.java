@@ -1,6 +1,5 @@
-package com.kakarote.crm.common.swaggerparams;
+package com.unique.javassist.swaggerparams;
 
-import com.kakarote.core.common.enums.CrmEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,5 +16,5 @@ import java.lang.annotation.Target;
         ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiParamsModel {
-    CrmEnum label() default CrmEnum.NULL;
+//    CrmEnum label() default CrmEnum.NULL;
 }
