@@ -1,7 +1,6 @@
 package com.unique.javassist.swaggerbody;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.unique.examine.common.enums.FieldEnum;
 import io.swagger.models.Model;
 import io.swagger.models.ModelImpl;
 import io.swagger.models.Swagger;
