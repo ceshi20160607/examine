@@ -1,15 +1,9 @@
 package com.unique.field.controller;
 
 
-import com.unique.core.common.Result;
-import com.unique.field.entity.po.Field;
-import com.unique.field.service.IFieldService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -17,21 +11,10 @@ import java.util.List;
  * </p>
  *
  * @author UNIQUE
- * @since 2023-08-28
+ * @since 2023-11-23
  */
 @RestController
 @RequestMapping("/field")
 public class FieldController {
-
-    @Autowired
-    private IFieldService iFieldService;
-
-
-    @GetMapping("/queryField")
-    @ApiOperation("根据ID查询")
-    public Result<List<Field>> queryField(@RequestParam("type") @ApiParam(name = "type", value = "type")  Long type) {
-        List<Field> fieldList = iFieldService.lambdaQuery().eq(Field::getModuleType, type).list();
-        return Result.ok(fieldList);
-    }
 
 }

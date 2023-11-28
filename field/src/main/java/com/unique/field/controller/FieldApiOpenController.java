@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 自定义字段关联用户表 前端控制器
+ * 第三方接口 字段对照表 前端控制器
  * </p>
  *
  * @author UNIQUE
  * @since 2023-11-23
  */
 @RestController
-@RequestMapping("/field-user")
-public class FieldUserController {
+@RequestMapping("/field-api-open")
+public class FieldApiOpenController {
 
 }

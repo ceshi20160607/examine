@@ -63,5 +63,25 @@ CREATE TABLE `un_field_user` (
 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='自定义字段关联用户表';
 
+-- 动态字段
+DROP TABLE IF EXISTS `un_field_api_open`;
+CREATE TABLE `un_field_api_open` (
+`id` bigint(20) NOT NULL AUTO_INCREMENT,
+`module_type` int(11) NOT NULL COMMENT '模块 ENUM中类型',
+`field_id` bigint(20) DEFAULT NULL COMMENT '字段ID',
+`parent_field_id` bigint(20) DEFAULT NULL COMMENT '父字段ID 目前适配逻辑表单',
+`field_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '自定义字段英文标识',
+`name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '字段名称',
+`type` int(11) NOT NULL DEFAULT '1' COMMENT '字段类型 1 单行文本 2 多行文本 3 单选 4日期 5 数字 6 小数 7 手机  8 文件 9 多选 10 人员 11 附件 12 部门 13 日期时间 14 邮箱 15客户 16 商机 17 联系人 18 地图 19 产品类型 20 合同 21 回款计划',
+`api_type` int(11) NOT NULL COMMENT '第三方类型 0ttc 1erp 2广告',
+`api_field_group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '自定义字段数组的名称',
+`api_field_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '自定义字段英文标识',
+`api_remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
+`create_user_id` bigint(20) NOT NULL COMMENT '创建人ID',
+`owner_user_id` bigint(20) DEFAULT NULL COMMENT '负责人ID',
+`create_time` datetime DEFAULT NULL COMMENT '创建时间',
+`update_time` datetime DEFAULT NULL COMMENT '更新时间',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='第三方接口 字段对照表';
 
 
