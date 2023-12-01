@@ -199,3 +199,5 @@ INSERT INTO `un_examine_template` VALUES (12, 1, 1, 1, NULL, 0, NULL, NULL, NULL
 INSERT INTO `un_examine_template` VALUES (13, 1, 2, NULL, NULL, 12, '12', 1, '{\"name\":\"zhangsna\",\"type\":1,\"value\":3}', 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `un_examine_template` VALUES (14, 1, 2, NULL, NULL, 12, '12', 1, '{\"name\":\"zhangsna\",\"type\":1,\"value\":3}', 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `un_examine_template` VALUES (15, 1, 1, 1, NULL, 0, NULL, NULL, NULL, 0, '1,2,3,4', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+
