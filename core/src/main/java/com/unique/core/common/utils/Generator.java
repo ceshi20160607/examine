@@ -62,8 +62,9 @@ public class Generator {
                             .likeTable(new LikeTable("un_"+moduleName, SqlLike.RIGHT))
                             .entityBuilder().enableLombok().addTableFills(tableFillList)
                             .controllerBuilder().enableRestStyle()
-//                            .mapperBuilder().superClass("")
-//                            .serviceBuilder().superServiceClass("").superServiceImplClass("")
+//                            .mapperBuilder().superClass("com.kakarote.core.servlet.BaseMapper")
+//                            .serviceBuilder().superServiceClass("com.kakarote.core.servlet.BaseService")
+//                            .superServiceImplClass("com.kakarote.core.servlet.BaseServiceImpl")
                             .build()
 
                     ;

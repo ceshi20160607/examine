@@ -69,11 +69,11 @@ public class GeneratorWukong {
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .templateConfig(builder ->{
                     builder.disable(TemplateType.CONTROLLER, TemplateType.SERVICE, TemplateType.SERVICEIMPL, TemplateType.MAPPER,TemplateType.XML)
-                           .controller("/controller.java")
-                           .service("/service.java")
-                           .serviceImpl("/serviceImpl.java")
-                            .mapper("/mapper.java")
-                           .mapperXml("/mapper.xml")
+                           .controller("/simple/controller.java")
+                           .service("/simple/service.java")
+                           .serviceImpl("/simple/serviceImpl.java")
+                            .mapper("/simple/mapper.java")
+                           .mapperXml("/simple/mapper.xml")
                           .build();
                 } )
                 .execute();

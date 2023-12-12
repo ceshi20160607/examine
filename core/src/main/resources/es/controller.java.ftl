@@ -69,7 +69,7 @@ public class ${table.controllerName} {
     @ApiOperation("查询列表页数据")
     public Result<BasePage<Map<String, Object>>> queryPageList(@RequestBody CrmSearchBO search) {
         search.setPageType(1);
-        BasePage<Map<String, Object>> mapBasePage = iCrmParamsService.queryPageList(search);
+        BasePage<Map<String, Object>> mapBasePage = ${table.serviceName?uncap_first}.queryPageList(search);
         return Result.ok(mapBasePage);
     }
     /**
@@ -82,7 +82,22 @@ public class ${table.controllerName} {
     @ApiOperation("保存数据")
     @OperateLog(behavior = BehaviorEnum.SAVE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
     public Result<Map<String, Object>> add(@RequestBody CrmBusinessSaveBO crmModel) {
-        Map<String, Object> map = iCrmParamsService.addOrUpdate(crmModel, false, null);
+        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
+        Object operation = map.get("operation");
+        map.remove("operation");
+        return OperationResult.ok(map, (List<OperationLog>) operation);
+    }
+    /**
+    * 保存数据
+    *
+    * @param CrmBusinessSaveBO 业务对象
+    * @return data
+    */
+    @PostMapping("/add")
+    @ApiOperation("保存数据")
+    @OperateLog(behavior = BehaviorEnum.SAVE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
+    public Result<Map<String, Object>> add(@RequestBody CrmBusinessSaveBO crmModel) {
+        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
         Object operation = map.get("operation");
         map.remove("operation");
         return OperationResult.ok(map, (List<OperationLog>) operation);
@@ -97,7 +112,7 @@ public class ${table.controllerName} {
     @ApiOperation("修改数据")
     @OperateLog(behavior = BehaviorEnum.UPDATE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
     public Result<Map<String, Object>> update(@RequestBody CrmBusinessSaveBO crmModel) {
-        Map<String, Object> map = iCrmParamsService.addOrUpdate(crmModel, false, null);
+        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
         Object operation = map.get("operation");
         map.remove("operation");
         return OperationResult.ok(map, (List<OperationLog>) operation);
@@ -110,7 +125,7 @@ public class ${table.controllerName} {
     @PostMapping("/queryById/{customerId}")
     @ApiOperation("根据ID查询")
     public Result<${entity}> queryById(@PathVariable("customerId") @ApiParam(name = "id", value = "id") Long customerId) {
-        ${entity} model = iCrmParamsService.queryById(customerId);
+        ${entity} model = ${table.serviceName?uncap_first}.queryById(customerId);
         return Result.ok(model);
     }
     /**
@@ -121,7 +136,7 @@ public class ${table.controllerName} {
     @PostMapping("/deleteByIds")
     @ApiOperation("根据ID删除数据")
     public Result deleteByIds(@ApiParam(name = "ids", value = "id列表") @RequestBody List<Long> ids) {
-        List<OperationLog> operationLogList = iCrmParamsService.deleteByIds(ids);
+        List<OperationLog> operationLogList = ${table.serviceName?uncap_first}.deleteByIds(ids);
         return OperationResult.ok(operationLogList);
     }
 
