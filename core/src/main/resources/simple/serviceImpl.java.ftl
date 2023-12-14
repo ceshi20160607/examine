@@ -80,9 +80,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     */
     @Override
     public ${entity} queryById(Long id) {
-        ${entity} byId = getById(id);
+        ${entity} byId = getBaseMapper().queryById(id);
         if (ObjectUtil.isNotEmpty(byId)) {
-        return byId;
+            return byId;
         }
         return new ${entity}();
     }

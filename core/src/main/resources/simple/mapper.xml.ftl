@@ -40,4 +40,10 @@
     <select id="queryPageList" resultType="java.util.Map">
         select * from ${table.name} where 1=1
     </select>
+    <select id="queryById" resultType="com.kakarote.crm.entity.PO.CrmDtcc">
+        select dtcc.*,dept.deptIds as deptIds
+        from ${table.name} dtcc
+        left join (SELECT dtcc_id, concat(dept_id, ',') as deptIds FROM ${table.name}_dept group by dtcc_id) dept on dtcc.id = dept.dtcc_id
+        where dtcc.id = #{id}
+    </select>
 </mapper>

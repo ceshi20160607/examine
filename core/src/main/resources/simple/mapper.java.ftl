@@ -33,5 +33,6 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
 BasePage<Map<String, Object>> queryPageList(BasePage<Object> parse, @Param("search") CrmSearchBO search);
 
+ ${entity} queryById(@Param("id")Long id);
 }
 </#if>
