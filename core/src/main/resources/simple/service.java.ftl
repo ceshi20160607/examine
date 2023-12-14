@@ -36,7 +36,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     /**
     * 保存或新增信息
     *
-    * @param ${entity} model
+    * @param crmModel
     */
     Map<String, Object> addOrUpdate(${entity} crmModel, boolean isExcel);
 

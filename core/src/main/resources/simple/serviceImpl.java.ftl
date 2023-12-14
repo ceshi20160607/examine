@@ -6,12 +6,13 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.kakarote.common.log.entity.OperationLog;
 import com.kakarote.core.entity.BasePage;
 import com.kakarote.crm.common.CrmModel;
 import com.kakarote.crm.entity.BO.*;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,10 +34,10 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 <#else>
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
-    @Autowired
-    private ICrmActionRecordService crmActionRecordService;
-    @Autowired
-    private ActionRecordUtil actionRecordUtil;
+//    @Autowired
+//    private ICrmActionRecordService crmActionRecordService;
+//    @Autowired
+//    private ActionRecordUtil actionRecordUtil;
 
     /**
     * 导出时查询所有数据
@@ -52,19 +53,19 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     /**
     * 保存或新增信息
     *
-    * @param ${entity} model
+    * @param newModel
     */
     @Override
     public Map<String, Object> addOrUpdate(${entity} newModel, boolean isExcel) {
         Map<String, Object> map = new HashMap<>();
         if (ObjectUtil.isEmpty(newModel.getId())){
             save(newModel);
-            actionRecordUtil.addRecord(newModel.getId(), CrmEnum.CUSTOMER, newModel.getName());
+            //actionRecordUtil.addRecord(newModel.getId(), CrmEnum.CUSTOMER, newModel.getName());
         }else {
-            CrmParams old = getById(newModel.getId());
+            ${entity}  old = getById(newModel.getId());
             newModel.setUpdateTime(LocalDateTime.now());
             updateById(newModel);
-            actionRecordUtil.updateRecord(BeanUtil.beanToMap(old), BeanUtil.beanToMap(newModel), CrmEnum.CUSTOMER, newModel.getName(), newModel.getId());
+            //actionRecordUtil.updateRecord(BeanUtil.beanToMap(old), BeanUtil.beanToMap(newModel), CrmEnum.CUSTOMER, newModel.getName(), newModel.getId());
         }
         map.put("id", newModel.getId());
         return map;
@@ -95,7 +96,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public List<OperationLog> deleteByIds(List<Long> ids) {
         removeByIds(ids);
         //删除字段操作记录
-        crmActionRecordService.deleteActionRecord(CrmEnum.CUSTOMER, ids);
+        //crmActionRecordService.deleteActionRecord(CrmEnum.CUSTOMER, ids);
         List<OperationLog> operationLogList = new ArrayList<>();
         return operationLogList;
     }

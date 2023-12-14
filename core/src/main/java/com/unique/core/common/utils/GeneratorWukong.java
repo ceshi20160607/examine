@@ -43,7 +43,7 @@ public class GeneratorWukong {
                     builder.parent(GENERATOR_PACKAGE) // 设置父包名
                             .entity("entity.PO")
 //                            .moduleName("examine") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, GENERATOR_LOCAL_XML_PATH))// 设置mapperXml生成路径
+//                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, GENERATOR_LOCAL_XML_PATH))// 设置mapperXml生成路径
                     ;
                 })
                 .strategyConfig(builder -> {

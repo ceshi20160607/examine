@@ -1,7 +1,5 @@
 package com.unique.examine.entity.bo;
 
-import com.unique.examine.entity.bo.ExamineBefore;
-import com.unique.examine.entity.bo.ExamineModel;
 import com.unique.examine.entity.po.*;
 import lombok.Data;
 

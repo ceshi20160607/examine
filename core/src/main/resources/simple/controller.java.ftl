@@ -53,6 +53,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 <#if superControllerClass??>
 public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
+@Api(tags = ${table.comment!})
 public class ${table.controllerName} {
 </#if>
 
@@ -108,10 +109,10 @@ public class ${table.controllerName} {
     * @param id 业务对象id
     * @return data
     */
-    @PostMapping("/queryById/{customerId}")
+    @PostMapping("/queryById/{id}")
     @ApiOperation("根据ID查询")
-    public Result<${entity}> queryById(@PathVariable("customerId") @ApiParam(name = "id", value = "id") Long customerId) {
-        ${entity} model = ${table.serviceName?uncap_first}.queryById(customerId);
+    public Result<${entity}> queryById(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
+        ${entity} model = ${table.serviceName?uncap_first}.queryById(id);
         return Result.ok(model);
     }
     /**

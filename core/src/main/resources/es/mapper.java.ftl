@@ -6,6 +6,13 @@ import ${superMapperClassPackage};
 import org.apache.ibatis.annotations.Mapper;
 </#if>
 
+import com.kakarote.core.entity.BasePage;
+import com.kakarote.crm.entity.BO.CrmSearchBO;
+import com.kakarote.crm.entity.PO.CrmDtccDept;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 /**
  * <p>
  * ${table.comment!} Mapper 接口
