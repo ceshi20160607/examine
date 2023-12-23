@@ -93,6 +93,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     * @param ids ids
     */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<OperationLog> deleteByIds(List<Long> ids) {
         removeByIds(ids);
         //删除字段操作记录
