@@ -6,9 +6,9 @@ import ${superMapperClassPackage};
 import org.apache.ibatis.annotations.Mapper;
 </#if>
 
+import com.kakarote.crm.common.CrmModel;
 import com.kakarote.core.entity.BasePage;
 import com.kakarote.crm.entity.BO.CrmSearchBO;
-import com.kakarote.crm.entity.PO.CrmDtccDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,6 +32,19 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
 
 BasePage<Map<String, Object>> queryPageList(BasePage<Object> parse, @Param("search") CrmSearchBO search);
-
+ /**
+ * 根据客户id，获取客户摘要
+ *
+ * @param id 主键ID
+ * @return data
+ */
+ CrmModel queryDigestById(@Param("id") Long id);
+ /**
+ * 通过id查询客户数据
+ *
+ * @param id     id
+ * @return data
+ */
+ CrmModel queryById(@Param("id") Long id);
 }
 </#if>

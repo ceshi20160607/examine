@@ -73,24 +73,38 @@ public class ${table.controllerName} {
         return Result.ok(mapBasePage);
     }
     /**
-    * 保存数据
+    * 新建页面字段
     *
-    * @param CrmBusinessSaveBO 业务对象
-    * @return data
     */
-    @PostMapping("/add")
-    @ApiOperation("保存数据")
-    @OperateLog(behavior = BehaviorEnum.SAVE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
-    public Result<Map<String, Object>> add(@RequestBody CrmBusinessSaveBO crmModel) {
-        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
-        Object operation = map.get("operation");
-        map.remove("operation");
-        return OperationResult.ok(map, (List<OperationLog>) operation);
+    @PostMapping("/field")
+    @ApiOperation("查询新增所需字段")
+    public Result<List> queryField(@RequestParam(value = "type", required = false) String type) {
+        if (StrUtil.isNotEmpty(type)) {
+            return Result.ok(${table.serviceName?uncap_first}.queryField(null));
+        }
+        return Result.ok(${table.serviceName?uncap_first}.queryFormPositionField(null));
     }
+
+    /**
+    * 编辑页面字段
+    *
+    * @param id
+    */
+    @PostMapping("/field/{id}")
+    @ApiOperation("查询修改数据所需信息")
+    public Result<List> queryFieldPath(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id,
+    @RequestParam(value = "type", required = false) String type) {
+        if (StrUtil.isNotEmpty(type)) {
+            List<CrmModelFieldVO> collect = ${table.serviceName?uncap_first}.queryField(id).stream().filter(field -> !field.getFieldName().equals("ownerUserId")).collect(Collectors.toList());
+            return Result.ok(collect);
+        }
+        return Result.ok(${table.serviceName?uncap_first}.queryFormPositionField(id));
+    }
+
     /**
     * 保存数据
     *
-    * @param CrmBusinessSaveBO 业务对象
+    * @param crmModel 业务对象
     * @return data
     */
     @PostMapping("/add")
@@ -105,7 +119,7 @@ public class ${table.controllerName} {
     /**
     * 更新数据
     *
-    * @param CrmBusinessSaveBO 业务对象
+    * @param crmModel 业务对象
     * @return data
     */
     @PostMapping("/update")
@@ -122,11 +136,25 @@ public class ${table.controllerName} {
     * @param id 业务对象id
     * @return data
     */
-    @PostMapping("/queryById/{customerId}")
+    @PostMapping("/queryById/{id}")
     @ApiOperation("根据ID查询")
-    public Result<${entity}> queryById(@PathVariable("customerId") @ApiParam(name = "id", value = "id") Long customerId) {
-        ${entity} model = ${table.serviceName?uncap_first}.queryById(customerId);
+    public Result<CrmModel> queryById(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
+        CrmModel model = ${table.serviceName?uncap_first}.queryById(id);
         return Result.ok(model);
+    }
+    /**
+    * 查询详情页基本信息
+    *
+    * @param  id
+    * @return data
+    */
+    @PostMapping("/information/{id}")
+    @ApiOperation("查询详情页信息")
+    public Result<List<CrmModelFieldVO>> information(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
+
+    List<CrmModelFieldVO> information = ${table.serviceName?uncap_first}.information(id);
+
+    return Result.ok(information);
     }
     /**
     * 删除数据

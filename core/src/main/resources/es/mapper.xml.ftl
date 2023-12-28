@@ -40,4 +40,14 @@
     <select id="queryPageList" resultType="java.util.Map">
         select * from ${table.name} where 1=1
     </select>
+    <select id="queryById" resultType="com.kakarote.crm.common.CrmModel">
+        select a.* from ${table.name} as a
+<#--        where customer_id = #{id}-->
+    </select>
+    <select id="queryDigestById" resultType="com.kakarote.crm.common.CrmModel">
+        select
+        (select count(1) from wk_crm_activity where type in (1,4) and activity_type = 2 and activity_type_id = a.customer_id and activity_type_id = activity_id) as activityCount
+        from ${table.name}  as a
+<#--        where a.customer_id = #{id}-->
+    </select>
 </mapper>

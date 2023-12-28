@@ -48,6 +48,13 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     */
     ${entity} queryById(Long id);
 
+    /**
+    * 查询详情
+    *
+    * @param id     主键ID
+    */
+    public List<CrmModelFieldVO> information(Long id);
+
 
     /**
     * 删除客户数据

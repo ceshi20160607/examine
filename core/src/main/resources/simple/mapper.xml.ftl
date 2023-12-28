@@ -44,6 +44,6 @@
         select dtcc.*,dept.deptIds as deptIds
         from ${table.name} dtcc
         left join (SELECT dtcc_id, concat(dept_id, ',') as deptIds FROM ${table.name}_dept group by dtcc_id) dept on dtcc.id = dept.dtcc_id
-        where dtcc.id = #{id}
+        where dtcc.id = id
     </select>
 </mapper>

@@ -32,6 +32,18 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @return data
     */
     BasePage<Map<String, Object>> queryPageList(CrmSearchBO search);
+    /**
+    * 查询字段配置
+    *
+    * @param id 主键ID
+    */
+    List<CrmModelFieldVO> queryField(Long id);
+    /**
+    * 查询字段配置
+    *
+    * @param id 主键ID
+    */
+    List<List<CrmModelFieldVO>> queryFormPositionField(Long id);
 
     /**
     * 保存或新增信息
@@ -46,8 +58,14 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     * @param id     主键ID
     * @return data
     */
-    ${entity} queryById(Long id);
+    CrmModel queryById(Long id);
 
+    /**
+    * 查询详情
+    *
+    * @param id     主键ID
+    */
+    public List<CrmModelFieldVO> information(Long id);
 
     /**
     * 删除客户数据
@@ -56,5 +74,12 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     */
     List<OperationLog> deleteByIds(List<Long> ids);
 
+    /**
+    * 根据客户id，获取客户摘要
+    *
+    * @param id 主键ID
+    * @return data
+    */
+    CrmModel queryDigestById(Long id);
 }
 </#if>

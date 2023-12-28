@@ -60,8 +60,9 @@ public class GeneratorWukong {
                             .likeTable(new LikeTable("wk_"+moduleName, SqlLike.RIGHT))
                             .entityBuilder().enableLombok().addTableFills(tableFillList)
                             .controllerBuilder().enableRestStyle()
-//                            .mapperBuilder().superClass("")
-//                            .serviceBuilder().superServiceClass("").superServiceImplClass("")
+//                            .mapperBuilder().superClass("com.kakarote.core.servlet.BaseMapper")
+//                            .serviceBuilder().superServiceClass("com.kakarote.core.servlet.BaseService")
+//                            .superServiceImplClass("com.kakarote.core.servlet.BaseServiceImpl")
                             .build()
 
                     ;
@@ -69,10 +70,16 @@ public class GeneratorWukong {
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .templateConfig(builder ->{
                     builder.disable(TemplateType.CONTROLLER, TemplateType.SERVICE, TemplateType.SERVICEIMPL, TemplateType.MAPPER,TemplateType.XML)
-                           .controller("/simple/controller.java")
+//                           .controller("/es/controller.java")
+//                           .service("/es/service.java")
+//                           .serviceImpl("/es/serviceImpl.java")
+//                           .mapper("/es/mapper.java")
+//                           .mapperXml("/es/mapper.xml")
+
+                            .controller("/simple/controller.java")
                            .service("/simple/service.java")
                            .serviceImpl("/simple/serviceImpl.java")
-                            .mapper("/simple/mapper.java")
+                           .mapper("/simple/mapper.java")
                            .mapperXml("/simple/mapper.xml")
                           .build();
                 } )

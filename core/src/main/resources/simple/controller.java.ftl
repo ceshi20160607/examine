@@ -6,8 +6,7 @@ import com.kakarote.common.log.entity.OperationResult;
 import com.kakarote.common.log.enums.ApplyEnum;
 import com.kakarote.common.log.enums.BehaviorEnum;
 import com.kakarote.common.log.enums.OperateObjectEnum;
-import com.kakarote.core.exception.CrmException;
-import com.kakarote.crm.common.CrmModel;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ class ${table.controllerName}<#if superControllerClass??> : ${superControllerCla
 <#if superControllerClass??>
 public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
-@Api(tags = ${table.comment!})
+@Api(tags = "${table.comment!}")
 public class ${table.controllerName} {
 </#if>
 
@@ -115,6 +114,21 @@ public class ${table.controllerName} {
         ${entity} model = ${table.serviceName?uncap_first}.queryById(id);
         return Result.ok(model);
     }
+    /**
+    * 查询详情页基本信息
+    *
+    * @param  id
+    * @return data
+    */
+    @PostMapping("/information/{id}")
+    @ApiOperation("查询详情页信息")
+    public Result<List<CrmModelFieldVO>> information(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
+
+        List<CrmModelFieldVO> information = ${table.serviceName?uncap_first}.information(id);
+
+        return Result.ok(information);
+    }
+
     /**
     * 删除数据
     * @param ids 业务对象ids
