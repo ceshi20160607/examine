@@ -6,10 +6,25 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.kakarote.common.field.entity.ModelField;
+import com.kakarote.crm.common.ActionRecordUtil;
+import com.kakarote.crm.constant.CrmEnum;
+import com.kakarote.crm.entity.PO.CrmField;
+import com.kakarote.crm.entity.PO.CrmQuote;
+import com.kakarote.crm.entity.VO.CrmModelFieldVO;
+import com.kakarote.crm.mapper.CrmQuoteMapper;
+import com.kakarote.crm.service.ICrmActionRecordService;
+import com.kakarote.crm.service.ICrmFieldService;
+import com.kakarote.crm.service.ICrmQuoteService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.hutool.core.util.ObjectUtil;
 import com.kakarote.common.log.entity.OperationLog;
 import com.kakarote.core.entity.BasePage;
-import com.kakarote.crm.common.CrmModel;
 import com.kakarote.crm.entity.BO.*;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +54,8 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 //    private ICrmActionRecordService crmActionRecordService;
 //    @Autowired
 //    private ActionRecordUtil actionRecordUtil;
+    @Autowired
+    private ICrmFieldService crmFieldService;
 
     /**
     * 导出时查询所有数据
@@ -84,8 +101,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         ${entity} byId = getBaseMapper().queryById(id);
         if (ObjectUtil.isNotEmpty(byId)) {
             return byId;
+        }else{
+            throw new CrmException(CrmCodeEnum.CRM_REQUEST_PARAMS_ERROR);
         }
-        return new ${entity}();
     }
 
     /**

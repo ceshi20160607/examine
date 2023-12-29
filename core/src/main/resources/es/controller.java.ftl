@@ -139,6 +139,10 @@ public class ${table.controllerName} {
     @PostMapping("/queryById/{id}")
     @ApiOperation("根据ID查询")
     public Result<CrmModel> queryById(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
+        boolean exists = ${table.serviceName?uncap_first}.lambdaQuery().eq( ${entity}::getId, id).ne(CrmCustomer::getStatus, 3).exists();
+        if (!exists) {
+            throw new CrmException(CrmCodeEnum.CRM_DATA_DELETED, CrmEnum.CUSTOMER.getType());
+        }
         CrmModel model = ${table.serviceName?uncap_first}.queryById(id);
         return Result.ok(model);
     }

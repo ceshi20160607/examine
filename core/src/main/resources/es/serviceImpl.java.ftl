@@ -167,7 +167,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public CrmModel queryById(Long id) {
         CrmModel crmModel;
         if (id != null) {
-            crmModel = getBaseMapper().queryById(id, UserUtil.getUserId());
+            crmModel = getBaseMapper().queryById(id);
             Long ownerUserId = crmModel.getOwnerUserId();
 
             crmModel.setLabel(getLabel().getType());
