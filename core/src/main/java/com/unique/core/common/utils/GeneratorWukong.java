@@ -81,6 +81,13 @@ public class GeneratorWukong {
                            .serviceImpl("/simple/serviceImpl.java")
                            .mapper("/simple/mapper.java")
                            .mapperXml("/simple/mapper.xml")
+
+//                            //simple2用于没有自定义字段还是要进行自定义字段的数据保存逻辑
+//                            .controller("/simple2/controller.java")
+//                           .service("/simple2/service.java")
+//                           .serviceImpl("/simple2/serviceImpl.java")
+//                           .mapper("/simple2/mapper.java")
+//                           .mapperXml("/simple2/mapper.xml")
                           .build();
                 } )
                 .execute();
