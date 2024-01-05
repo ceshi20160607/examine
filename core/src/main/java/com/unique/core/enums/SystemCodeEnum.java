@@ -29,6 +29,9 @@ public enum SystemCodeEnum implements ResultBaseCode {
     SYSTEM_METHOD_ERROR(405, "请求方式错误"),
     //请求超时
     SYSTEM_REQUEST_TIMEOUT(408, "请求超时"),
+
+    DIGITAL_SIGNATURE_ERROR(501, "签名验证异常!"),
+
     //服务调用异常
     SYSTEM_SERVER_ERROR(1001, "服务调用异常"),
     //企业信息已到期

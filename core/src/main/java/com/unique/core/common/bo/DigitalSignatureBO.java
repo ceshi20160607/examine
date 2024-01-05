@@ -20,4 +20,8 @@ public class DigitalSignatureBO implements Serializable {
     @NotNull
     @ApiModelProperty("数据签名")
     private String sign;
+
+    @NotNull
+    @ApiModelProperty("加密secretkey")
+    private String encryptSecretKey;
 }
