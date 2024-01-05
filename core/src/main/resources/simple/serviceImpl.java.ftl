@@ -13,13 +13,9 @@ import com.kakarote.common.field.entity.ModelField;
 import com.kakarote.crm.common.ActionRecordUtil;
 import com.kakarote.crm.constant.CrmEnum;
 import com.kakarote.crm.entity.PO.CrmField;
-import com.kakarote.crm.entity.PO.CrmQuote;
 import com.kakarote.crm.entity.VO.CrmModelFieldVO;
-import com.kakarote.crm.mapper.CrmQuoteMapper;
 import com.kakarote.crm.service.ICrmActionRecordService;
 import com.kakarote.crm.service.ICrmFieldService;
-import com.kakarote.crm.service.ICrmQuoteService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.hutool.core.util.ObjectUtil;
