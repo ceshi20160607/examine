@@ -6,6 +6,9 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
+
+import com.kakarote.core.exception.CrmException;
+import com.kakarote.crm.constant.CrmCodeEnum;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
