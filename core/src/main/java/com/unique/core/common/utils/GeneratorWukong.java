@@ -70,17 +70,18 @@ public class GeneratorWukong {
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .templateConfig(builder ->{
                     builder.disable(TemplateType.CONTROLLER, TemplateType.SERVICE, TemplateType.SERVICEIMPL, TemplateType.MAPPER,TemplateType.XML)
-//                           .controller("/es/controller.java")
-//                           .service("/es/service.java")
-//                           .serviceImpl("/es/serviceImpl.java")
-//                           .mapper("/es/mapper.java")
-//                           .mapperXml("/es/mapper.xml")
+                           .controller("/es/controller.java")
+                           .service("/es/service.java")
+                           .serviceImpl("/es/serviceImpl.java")
+                           .mapper("/es/mapper.java")
+                           .mapperXml("/es/mapper.xml")
 
-                            .controller("/simple/controller.java")
-                           .service("/simple/service.java")
-                           .serviceImpl("/simple/serviceImpl.java")
-                           .mapper("/simple/mapper.java")
-                           .mapperXml("/simple/mapper.xml")
+//                            //simple用于mp生成的基础的模板
+//                            .controller("/simple/controller.java")
+//                           .service("/simple/service.java")
+//                           .serviceImpl("/simple/serviceImpl.java")
+//                           .mapper("/simple/mapper.java")
+//                           .mapperXml("/simple/mapper.xml")
 
 //                            //simple2用于没有自定义字段还是要进行自定义字段的数据保存逻辑
 //                            .controller("/simple2/controller.java")

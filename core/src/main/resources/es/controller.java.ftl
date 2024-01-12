@@ -1,6 +1,7 @@
 package ${package.Controller};
 
 
+import cn.hutool.core.util.StrUtil;
 import com.kakarote.common.log.annotation.OperateLog;
 import com.kakarote.common.log.entity.OperationResult;
 import com.kakarote.common.log.enums.ApplyEnum;
@@ -8,6 +9,9 @@ import com.kakarote.common.log.enums.BehaviorEnum;
 import com.kakarote.common.log.enums.OperateObjectEnum;
 import com.kakarote.core.exception.CrmException;
 import com.kakarote.crm.common.CrmModel;
+import com.kakarote.crm.constant.CrmCodeEnum;
+import com.kakarote.crm.constant.CrmEnum;
+import com.kakarote.crm.entity.VO.CrmModelFieldVO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.kakarote.core.common.Result;
 import com.kakarote.core.entity.BasePage;
@@ -111,7 +116,7 @@ public class ${table.controllerName} {
     @ApiOperation("保存数据")
     @OperateLog(behavior = BehaviorEnum.SAVE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
     public Result<Map<String, Object>> add(@RequestBody CrmBusinessSaveBO crmModel) {
-        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
+        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false);
         Object operation = map.get("operation");
         map.remove("operation");
         return OperationResult.ok(map, (List<OperationLog>) operation);
@@ -126,7 +131,7 @@ public class ${table.controllerName} {
     @ApiOperation("修改数据")
     @OperateLog(behavior = BehaviorEnum.UPDATE, apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER)
     public Result<Map<String, Object>> update(@RequestBody CrmBusinessSaveBO crmModel) {
-        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false, null);
+        Map<String, Object> map = ${table.serviceName?uncap_first}.addOrUpdate(crmModel, false);
         Object operation = map.get("operation");
         map.remove("operation");
         return OperationResult.ok(map, (List<OperationLog>) operation);
@@ -139,7 +144,7 @@ public class ${table.controllerName} {
     @PostMapping("/queryById/{id}")
     @ApiOperation("根据ID查询")
     public Result<CrmModel> queryById(@PathVariable("id") @ApiParam(name = "id", value = "id") Long id) {
-        boolean exists = ${table.serviceName?uncap_first}.lambdaQuery().eq( ${entity}::getId, id).ne(CrmCustomer::getStatus, 3).exists();
+        boolean exists = ${table.serviceName?uncap_first}.lambdaQuery().eq( ${entity}::getId, id).ne(${entity}::getStatus, 3).exists();
         if (!exists) {
             throw new CrmException(CrmCodeEnum.CRM_DATA_DELETED, CrmEnum.CUSTOMER.getType());
         }
@@ -172,7 +177,31 @@ public class ${table.controllerName} {
         return OperationResult.ok(operationLogList);
     }
 
+    @PostMapping("/batchExportExcel")
+    @ApiOperation("选中导出")
+    @OperateLog(apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER, type = OperateTypeEnum.EXPORT, behavior = BehaviorEnum.EXCEL_EXPORT)
+    public void batchExportExcel(@RequestBody CrmExportBO exportBO, HttpServletResponse response) {
+        CrmSearchBO search = new CrmSearchBO();
+        search.setPageType(0);
+        search.setLabel(CrmEnum.CUSTOMER.getType());
+        Search entity = new Search();
+        entity.setFormType(FieldEnum.TEXT.getFormType());
+        entity.setSearchEnum(FieldSearchEnum.ID);
+        entity.setValues(exportBO.getIds().stream().map(Object::toString).collect(Collectors.toList()));
+        search.getSearchList().add(entity);
+        search.setPageType(0);
+        search.setSortIds(exportBO.getSortIds());
+        iCrmShortfallService.exportExcel(response, exportBO.getSearch(), exportBO.getSortIds(), exportBO);
+    }
 
+    @PostMapping("/allExportExcel")
+    @ApiOperation("全部导出")
+    @OperateLog(apply = ApplyEnum.CRM, object = OperateObjectEnum.CUSTOMER, type = OperateTypeEnum.EXPORT, behavior = BehaviorEnum.EXCEL_EXPORT)
+    public void allExportExcel(@RequestBody CrmExportBO exportBO, HttpServletResponse response) {
+        exportBO.getSearch().setPageType(0);
+        exportBO.getSearch().setSortIds(exportBO.getSortIds());
+        iCrmShortfallService.exportExcel(response, exportBO.getSearch(), exportBO.getSortIds(), exportBO);
+    }
 }
 </#if>
 

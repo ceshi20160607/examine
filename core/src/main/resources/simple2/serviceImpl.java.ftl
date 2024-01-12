@@ -6,6 +6,17 @@ import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
+import com.kakarote.core.exception.CrmException;
+import com.kakarote.core.feign.admin.entity.SimpleUser;
+import com.kakarote.core.utils.UserUtil;
+import com.kakarote.crm.common.CrmModel;
+import com.kakarote.crm.constant.CrmCodeEnum;
+import com.kakarote.crm.entity.PO.CrmShortfall;
+import com.kakarote.crm.mapper.CrmShortfallMapper;
+import com.kakarote.crm.service.ICrmShortfallService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -25,10 +36,7 @@ import com.kakarote.crm.entity.BO.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>

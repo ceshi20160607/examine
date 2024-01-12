@@ -7,6 +7,7 @@ import com.kakarote.common.log.entity.OperationLog;
 import com.kakarote.crm.common.CrmModel;
 import com.kakarote.crm.entity.BO.*;
 import com.kakarote.core.entity.BasePage;
+import com.kakarote.crm.entity.VO.CrmModelFieldVO;
 
 import java.util.List;
 import java.util.Map;

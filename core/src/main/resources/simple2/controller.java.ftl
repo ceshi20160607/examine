@@ -1,11 +1,14 @@
 package ${package.Controller};
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.kakarote.common.log.annotation.OperateLog;
 import com.kakarote.common.log.entity.OperationResult;
 import com.kakarote.common.log.enums.ApplyEnum;
 import com.kakarote.common.log.enums.BehaviorEnum;
 import com.kakarote.common.log.enums.OperateObjectEnum;
+import com.kakarote.crm.common.CrmModel;
+import com.kakarote.crm.entity.VO.CrmModelFieldVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.kakarote.core.common.Result;
 import com.kakarote.core.entity.BasePage;
