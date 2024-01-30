@@ -1,0 +1,20 @@
+package com.unique.approve.service.impl;
+
+import com.unique.approve.entity.po.ExamineSetting;
+import com.unique.approve.mapper.ExamineSettingMapper;
+import com.unique.approve.service.IExamineSettingService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * 审批高级设置及异常处理规则 服务实现类
+ * </p>
+ *
+ * @author UNIQUE
+ * @since 2024-01-30
+ */
+@Service
+public class ExamineSettingServiceImpl extends ServiceImpl<ExamineSettingMapper, ExamineSetting> implements IExamineSettingService {
+
+}

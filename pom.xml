@@ -23,6 +23,7 @@
         <module>web</module>
         <module>javassist</module>
         <module>field</module>
+        <module>approve</module>
     </modules>
 
     <properties>

@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Generator {
 
-    public static final String GENERATOR_URL = "jdbc:mysql://8.142.109.85:3306/unexamine";
+    public static final String GENERATOR_URL = "jdbc:mysql://8.142.109.85:3306/unexamine2";
     public static final String GENERATOR_USERNAME = "un";
     public static final String GENERATOR_PASSWORD = "password";
     public static final String GENERATOR_AUTHOR = "UNIQUE";
@@ -31,8 +31,9 @@ public class Generator {
         System.out.println("请模块名称：");
         Scanner inputScanner = new Scanner(System.in);
         String moduleName = inputScanner.next();
-        String parentPackageName = GENERATOR_PACKAGE+moduleName;
-        String parckagePath = GENERATOR_LOCAL_PATH + moduleName + GENERATOR_PACKAGE_PATH;
+        String moduleName1 = "approve";
+        String parentPackageName = GENERATOR_PACKAGE+moduleName1;
+        String parckagePath = GENERATOR_LOCAL_PATH + moduleName1 + GENERATOR_PACKAGE_PATH;
         inputScanner.close();
         FastAutoGenerator.create(GENERATOR_URL, GENERATOR_USERNAME, GENERATOR_PASSWORD)
                 .globalConfig(builder -> {
