@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -69,6 +71,12 @@ public class ExamineNode implements Serializable {
 
     @ApiModelProperty("转他人处理flag 默认0 1表示这个是转他人的审批场景 2抄送的邮箱")
     private Integer transferFlag;
+
+    //---------------------------
+    @ApiModelProperty("用户")
+    @TableField(exist = false)
+    private List<ExamineNodeUser> nodeUserList;
+    //---------------------------
 
     @ApiModelProperty("类型是转他人对应的主键")
     private Long transferUserId;
