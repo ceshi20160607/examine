@@ -10,5 +10,13 @@
     </parent>
 
     <artifactId>approve</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.unique</groupId>
+            <artifactId>core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
