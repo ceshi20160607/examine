@@ -1,9 +1,18 @@
 package com.unique.approve.controller;
 
 
+import com.unique.approve.entity.po.ExamineRecordNode;
+import com.unique.approve.service.IExamineRecordNodeService;
+import com.unique.core.common.BasePage;
+import com.unique.core.common.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-01-30
  */
 @RestController
-@RequestMapping("/examine-record-node")
+@RequestMapping("/examineRecordNode")
 public class ExamineRecordNodeController {
 
+    @Autowired
+    private IExamineRecordNodeService examineRecordNodeService;
+
+    @GetMapping("/queryList/{examineRecordId}")
+    public Result list(@PathVariable("examineRecordId") Long examineRecordId){
+//        BasePage<ExamineRecordNode> ret = examineRecordNodeService.pageList(examineRecordId);
+        return Result.ok(null);
+    }
 }
