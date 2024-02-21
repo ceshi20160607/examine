@@ -1,5 +1,6 @@
 package com.unique.approve.service;
 
+import com.unique.approve.entity.dto.ExamineNodeFill;
 import com.unique.approve.entity.po.ExamineRecordNode;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IExamineRecordNodeService extends IService<ExamineRecordNode> {
 
+    void fillNodeUser(ExamineNodeFill examineNodeFill);
 }

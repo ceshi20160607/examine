@@ -1,11 +1,9 @@
 package com.unique.admin.entity.bo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.unique.core.common.enums.DeviceTypeEnum;
-import com.unique.core.common.enums.LoginTypeEnum;
+import com.unique.core.enums.DeviceTypeEnum;
+import com.unique.core.enums.LoginTypeEnum;
 import lombok.Data;
-
-import java.io.Serializable;
 
 /**
  * 用户

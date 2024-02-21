@@ -1,9 +1,7 @@
 package com.unique.note.entity.bo;
 
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author UNIQUE

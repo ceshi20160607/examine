@@ -1,9 +1,7 @@
 package com.unique.examine.entity.bo;
 
-import com.unique.core.common.bo.BaseSearch;
+import com.unique.core.bo.BaseSearch;
 import lombok.Data;
-
-import java.io.Serializable;
 
 /**
  * @author UNIQUE

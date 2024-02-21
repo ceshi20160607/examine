@@ -50,6 +50,9 @@ public class ExamineNodeUser implements Serializable {
     @ApiModelProperty("邮箱")
     private String eamil;
 
+//    @ApiModelProperty("排序")
+//    private Integer sorting;
+
     @ApiModelProperty("创建人")
     @TableField(fill = FieldFill.INSERT)
     private Long createUserId;

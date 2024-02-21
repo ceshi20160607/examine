@@ -1,4 +1,4 @@
-package com.unique.core.common.thirdapi;
+package com.unique.core.thirdapi;
 
 import lombok.Getter;
 import lombok.Setter;

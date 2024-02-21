@@ -1,4 +1,4 @@
-package com.unique.core.common.utils;
+package com.unique.core.utils;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
@@ -6,8 +6,8 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.unique.core.common.bo.BaseSearch;
-import com.unique.core.common.enums.SearchFieldEnum;
+import com.unique.core.bo.BaseSearch;
+import com.unique.core.enums.SearchFieldEnum;
 
 import java.math.BigDecimal;
 import java.util.*;

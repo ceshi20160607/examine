@@ -5,20 +5,22 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class ExamineContext implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    //-------------------------前置参数------------------------------
+    /**
+     * 关联审批模块
+     */
+    private Long examineId;
     //-------------------------审批基础参数------------------------------
     /**
      * 审批基础信息
      */
     private Examine examine;
-    /**
-     * 审批节点信息
-     */
-    private List<ExamineNode> examineNodeList;
     /**
      * 审批配置--基础信息
      */
@@ -26,8 +28,21 @@ public class ExamineContext implements Serializable {
     /**
      * 审批配置--基础用户信息
      */
-    private ExamineSettingUser examineSettingUser;
+    private List<ExamineSettingUser> examineSettingUserList;
+
+    /**
+     * 审批节点信息
+     */
+    private List<ExamineNode> examineNodeList;
+    /**
+     * 审批节点信息用户相关
+     */
+    private Map<Long,List<ExamineNodeUser>> examineNodeUserList;
     //-------------------------审批节点信息------------------------------
+    /**
+     * 具体审批recordId
+     */
+    private Long examineRecordId ;
     /**
      * 具体审批
      */
@@ -36,12 +51,14 @@ public class ExamineContext implements Serializable {
      * 具体审批-审批日志
      */
     private List<ExamineRecordNode> examineRecordNodeList;
+
     //-------------------------审批请求参数------------------------------
-    //请求时候已经构建完成了审批的node
+//    //1.请求时候已经构建完成了审批的node
+//    //2.动态的添加审批节点的时候配置
 //    /**
 //     * 审批过程构建的参数
 //     */
-//    private List<ExamineNode> fillNodeList;
+//    private List<ExamineNodeFill> examineNodeFillList;
     //-------------------------审批请求参数------------------------------
     /**
      * 审批业务数据---用于以后拓展 字段相关

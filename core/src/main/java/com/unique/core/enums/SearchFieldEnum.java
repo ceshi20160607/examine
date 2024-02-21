@@ -1,4 +1,4 @@
-package com.unique.core.common.enums;
+package com.unique.core.enums;
 
 /**
  * 字段匹配类型

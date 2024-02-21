@@ -5,7 +5,7 @@ import com.unique.admin.mapper.AdminDeptMapper;
 import com.unique.admin.service.IAdminDeptService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.unique.core.common.BasePage;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

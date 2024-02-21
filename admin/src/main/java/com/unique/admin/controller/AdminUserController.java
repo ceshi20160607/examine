@@ -8,7 +8,7 @@ import com.unique.admin.entity.vo.AdminUserVO;
 import com.unique.admin.service.IAdminUserService;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

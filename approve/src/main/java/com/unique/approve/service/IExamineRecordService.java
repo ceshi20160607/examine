@@ -1,5 +1,6 @@
 package com.unique.approve.service;
 
+import com.unique.approve.entity.dto.ExamineContext;
 import com.unique.approve.entity.po.ExamineRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IExamineRecordService extends IService<ExamineRecord> {
 
+    void create(ExamineContext context);
+
+    void process(ExamineContext context);
 }

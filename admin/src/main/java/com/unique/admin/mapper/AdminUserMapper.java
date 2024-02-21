@@ -4,7 +4,7 @@ import com.unique.admin.entity.po.AdminUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.unique.admin.entity.vo.AdminUserVO;
 import com.unique.core.common.BasePage;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

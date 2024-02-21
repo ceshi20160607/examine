@@ -1,10 +1,4 @@
-package com.unique.core.common.enums;
-
-import com.alibaba.fastjson.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+package com.unique.core.enums;
 
 /**
  * 用户状态枚举
@@ -12,16 +6,15 @@ import java.util.List;
  * @author UNIQUE
  * @date 2023/3/27
  */
-public enum UserStatusEnum {
+public enum DeviceTypeEnum {
     /**
      * 审批 类型枚举
      */
-    NOT_ACTIVE(0, "未激活"),
-    NORMAL(1, "正常"),
-    DISABLED(2, "禁用"),
+    PC(0, "PC"),
+    APP(1, "APP"),
     ;
 
-    UserStatusEnum(Integer type, String remarks) {
+    DeviceTypeEnum(Integer type, String remarks) {
         this.type = type;
         this.remarks = remarks;
     }
@@ -38,8 +31,8 @@ public enum UserStatusEnum {
         return remarks;
     }
 
-    public static UserStatusEnum parse(Integer type) {
-        for (UserStatusEnum item : values()) {
+    public static DeviceTypeEnum parse(Integer type) {
+        for (DeviceTypeEnum item : values()) {
             if (item.getType().equals(type)) {
                 return item;
             }

@@ -3,7 +3,7 @@ package com.unique.admin.service;
 import com.unique.admin.entity.po.AdminDept;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.unique.core.common.BasePage;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 
 import java.util.List;
 

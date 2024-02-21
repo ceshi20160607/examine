@@ -4,9 +4,9 @@ import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.unique.approve.entity.po.*;
 import com.unique.approve.enums.TransferFlagEnum;
-import com.unique.core.common.bo.SendEmailBO;
-import com.unique.core.common.utils.EmailUtil;
-import com.unique.core.common.utils.SearchFieldUtil;
+import com.unique.core.bo.SendEmailBO;
+import com.unique.core.utils.EmailUtil;
+import com.unique.core.utils.SearchFieldUtil;
 import com.unique.approve.enums.CheckStatusEnum;
 import com.unique.approve.enums.ExamineTypeEnum;
 import com.unique.approve.enums.ExamineNodeTypeEnum;
@@ -126,6 +126,7 @@ public class ExamineUtil {
      * @param context
      */
     public static void examineProcess (ExamineContext context){
+        //todo:适配审批的配置来进行后续的循环处理后续的审批
         List<ExamineRecordNode> ExamineRecordNodeList = context.getExamineRecordNodeList().stream().filter(r->r.getStatus().equals(CheckStatusEnum.CHECK_ING.getType())).collect(Collectors.toList());
         switch (ExamineNodeTypeEnum.parse(ExamineRecordNodeList.get(0).getNodeType())){
             case GENERAL:

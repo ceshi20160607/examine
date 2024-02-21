@@ -18,7 +18,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_group`;
 CREATE TABLE `un_examine_group`  (
-`id` bigint(20) NOT NULL COMMENT '分组id',
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '分组id',
 `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分组名称',
 `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
 `update_user_id` bigint(20) NULL DEFAULT NULL COMMENT '更新人',
@@ -30,7 +30,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_setting`;
 CREATE TABLE `un_examine_setting`  (
-`id` bigint(20) NOT NULL COMMENT 'id',
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
 `examine_id` bigint(20) NOT NULL COMMENT '审批id',
 `rule_type` int(11) NULL DEFAULT NULL COMMENT '0撤回规则 1通过规则 ',
 `recheck_type` int(11) NULL DEFAULT NULL COMMENT '撤回之后重新审核操作 1 从第一层开始 2 从拒绝的层级开始',
@@ -50,7 +50,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_setting_user`;
 CREATE TABLE `un_examine_setting_user`  (
-`id` bigint(20) NOT NULL COMMENT 'id',
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
 `examine_id` bigint(20) NOT NULL COMMENT '审批id',
 `apply_type` int(10) NOT NULL COMMENT '适用类型 0用户 1部门',
 `user_id` bigint(20) NOT NULL COMMENT '适用用户id',
@@ -76,7 +76,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_node`;
 CREATE TABLE `un_examine_node`  (
-`id` bigint(20) NOT NULL AUTO_INCREMENT,
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
 `examine_id` bigint(20) NULL DEFAULT NULL COMMENT '审批id--关联的审批的高级配置，以及审批的基础信息',
 `module_id` bigint(20) NULL DEFAULT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa',
 
@@ -112,7 +112,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_node_user`;
 CREATE TABLE `un_examine_node_user`  (
-`id` bigint(20) NOT NULL COMMENT 'id',
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
 `examine_id` bigint(20) NOT NULL COMMENT '审批id',
 `node_id` bigint(20) NOT NULL COMMENT '节点id',
 `apply_type` int(10) NOT NULL COMMENT '适用类型 0用户 1部门 2 角色 4邮箱',
@@ -120,6 +120,7 @@ CREATE TABLE `un_examine_node_user`  (
 `dept_id` bigint(20) NOT NULL COMMENT '适用部门id',
 `role_id` bigint(20) NOT NULL COMMENT '适用角色id',
 `eamil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+`sorting` int(11) NULL DEFAULT NULL COMMENT '排序',
 `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
 `update_user_id` bigint(20) NULL DEFAULT NULL COMMENT '更新人',
 `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
@@ -133,7 +134,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_record`;
 CREATE TABLE `un_examine_record`  (
-`id` bigint(20) NOT NULL COMMENT '审核记录ID',
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '审核记录ID',
 `examine_id` bigint(20) NOT NULL COMMENT '审核ID',
 `module_id` bigint(20) NOT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa',
 `relation_id` bigint(20) NULL DEFAULT NULL COMMENT '关联业务主键ID',
@@ -151,7 +152,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_record_node`;
 CREATE TABLE `un_examine_record_node`  (
-`id` bigint(20) NOT NULL AUTO_INCREMENT,
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
 `examine_id` bigint(20) NULL DEFAULT NULL COMMENT '审批id--关联的审批的高级配置，以及审批的基础信息',
 `module_id` bigint(20) NULL DEFAULT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa',
 `record_id` bigint(20) NULL DEFAULT NULL COMMENT '关联的record_id',

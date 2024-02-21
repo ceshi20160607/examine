@@ -1,4 +1,4 @@
-package com.unique.core.common.bo;
+package com.unique.core.bo;
 
 import com.unique.core.common.BasePage;
 import io.swagger.annotations.ApiModelProperty;

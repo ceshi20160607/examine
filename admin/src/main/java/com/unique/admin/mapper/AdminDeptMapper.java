@@ -3,7 +3,7 @@ package com.unique.admin.mapper;
 import com.unique.admin.entity.po.AdminDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.unique.core.common.BasePage;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

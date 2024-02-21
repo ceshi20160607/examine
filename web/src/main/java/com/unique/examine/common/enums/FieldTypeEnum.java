@@ -7,7 +7,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.unique.core.common.utils.CityUtil;
+import com.unique.core.utils.CityUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 

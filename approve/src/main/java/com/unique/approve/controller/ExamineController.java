@@ -1,7 +1,9 @@
 package com.unique.approve.controller;
 
 
+import com.unique.approve.entity.bo.ExamineSaveBO;
 import com.unique.approve.entity.dto.ExamineContext;
+import com.unique.approve.entity.dto.ExamineNodeFill;
 import com.unique.approve.service.IExamineService;
 import com.unique.core.common.Result;
 import io.swagger.annotations.ApiOperation;
@@ -36,23 +38,8 @@ public class ExamineController {
      */
     @PostMapping("/add")
     @ApiOperation("添加审批")
-    public Result add(@RequestBody ExamineContext context){
-        iExamineService.addOrUpdate(context);
-        return Result.ok();
-    }
-
-
-
-
-    /**
-     * 进行审核
-     * @author UNIQUE
-     * @date 2023/3/15
-     */
-    @PostMapping("/process")
-    @ApiOperation("进行审批")
-    public Result process(@RequestBody ExamineContext context){
-        iExamineService.process(context);
+    public Result add(@RequestBody ExamineSaveBO saveBO){
+        iExamineService.addOrUpdate(saveBO);
         return Result.ok();
     }
 

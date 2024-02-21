@@ -1,7 +1,5 @@
-package com.unique.core.common.bo;
+package com.unique.core.bo;
 
-import com.unique.core.common.enums.FieldEnum;
-import com.unique.core.common.enums.SearchFieldEnum;
 import lombok.Data;
 
 import java.io.Serializable;

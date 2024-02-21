@@ -1,4 +1,4 @@
-package com.unique.core.common.utils;
+package com.unique.core.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,4 +1,4 @@
-package com.unique.core.common.enums;
+package com.unique.core.enums;
 
 /**
  * 用户状态枚举
@@ -6,16 +6,16 @@ package com.unique.core.common.enums;
  * @author UNIQUE
  * @date 2023/3/27
  */
-public enum LoginTypeEnum {
+public enum UserStatusEnum {
     /**
      * 审批 类型枚举
      */
-    PASSWORD(0, "password"),
-    MOBIEL(1, "mobiel"),
-    SSO(2, "sso"),
+    NOT_ACTIVE(0, "未激活"),
+    NORMAL(1, "正常"),
+    DISABLED(2, "禁用"),
     ;
 
-    LoginTypeEnum(Integer type, String remarks) {
+    UserStatusEnum(Integer type, String remarks) {
         this.type = type;
         this.remarks = remarks;
     }
@@ -32,8 +32,8 @@ public enum LoginTypeEnum {
         return remarks;
     }
 
-    public static LoginTypeEnum parse(Integer type) {
-        for (LoginTypeEnum item : values()) {
+    public static UserStatusEnum parse(Integer type) {
+        for (UserStatusEnum item : values()) {
             if (item.getType().equals(type)) {
                 return item;
             }

@@ -1,4 +1,4 @@
-package com.unique.core.common.enums;
+package com.unique.core.enums;
 
 /**
  * 用户状态枚举
@@ -6,15 +6,16 @@ package com.unique.core.common.enums;
  * @author UNIQUE
  * @date 2023/3/27
  */
-public enum DeviceTypeEnum {
+public enum LoginTypeEnum {
     /**
      * 审批 类型枚举
      */
-    PC(0, "PC"),
-    APP(1, "APP"),
+    PASSWORD(0, "password"),
+    MOBIEL(1, "mobiel"),
+    SSO(2, "sso"),
     ;
 
-    DeviceTypeEnum(Integer type, String remarks) {
+    LoginTypeEnum(Integer type, String remarks) {
         this.type = type;
         this.remarks = remarks;
     }
@@ -31,8 +32,8 @@ public enum DeviceTypeEnum {
         return remarks;
     }
 
-    public static DeviceTypeEnum parse(Integer type) {
-        for (DeviceTypeEnum item : values()) {
+    public static LoginTypeEnum parse(Integer type) {
+        for (LoginTypeEnum item : values()) {
             if (item.getType().equals(type)) {
                 return item;
             }

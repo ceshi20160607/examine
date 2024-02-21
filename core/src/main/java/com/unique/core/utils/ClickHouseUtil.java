@@ -1,7 +1,7 @@
-package com.unique.core.common.utils;
+package com.unique.core.utils;
 
 
-import com.unique.core.common.enums.FieldEnum;
+import com.unique.core.enums.FieldEnum;
 
 /**
  * @author ceshi

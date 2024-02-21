@@ -1,4 +1,4 @@
-package com.unique.core.common.utils;
+package com.unique.core.utils;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.Method;

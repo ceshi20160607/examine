@@ -1,18 +1,16 @@
 package com.unique.admin.controller;
 
 
-import com.unique.admin.common.utils.EncryptUtil;
 import com.unique.admin.entity.po.AdminDept;
 import com.unique.admin.service.IAdminDeptService;
 import com.unique.core.common.BasePage;
 import com.unique.core.common.Result;
-import com.unique.core.common.bo.SearchBO;
+import com.unique.core.bo.SearchBO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

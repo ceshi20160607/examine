@@ -1,4 +1,4 @@
-package com.unique.core.common.enums;
+package com.unique.core.enums;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
@@ -7,7 +7,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.unique.core.common.utils.CityUtil;
+import com.unique.core.utils.CityUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 

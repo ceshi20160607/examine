@@ -1,4 +1,4 @@
-package com.unique.core.common.utils;
+package com.unique.core.utils;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
