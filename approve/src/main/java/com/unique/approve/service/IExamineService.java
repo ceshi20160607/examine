@@ -1,10 +1,13 @@
 package com.unique.approve.service;
 
 import com.unique.approve.entity.bo.ExamineSaveBO;
-import com.unique.approve.entity.dto.ExamineContext;
-import com.unique.approve.entity.dto.ExamineNodeFill;
+import com.unique.approve.entity.bo.ExamineSearchBO;
 import com.unique.approve.entity.po.Examine;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.unique.approve.entity.vo.ExamineVO;
+import com.unique.core.common.BasePage;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,4 +21,7 @@ public interface IExamineService extends IService<Examine> {
 
     void addOrUpdate(ExamineSaveBO saveBO);
 
+    BasePage<ExamineVO> queryPageList(ExamineSearchBO searchBO);
+
+    void deteleByIds(List<Long> ids);
 }

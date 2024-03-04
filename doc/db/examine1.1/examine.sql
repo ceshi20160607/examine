@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `un_examine`;
 CREATE TABLE `un_examine`  (
-`id` bigint(20) UNSIGNED NOT NULL COMMENT '审批ID',
+`id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '审批ID',
 `module_id` bigint(20) NOT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa 1 合同 2 回款 3发票   101 普通审批 102 请假审批 103 出差审批 104 加班审批 105 差旅报销 106 借款申请',
 `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
 `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '审批名称',
@@ -76,7 +76,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_node`;
 CREATE TABLE `un_examine_node`  (
- `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
 `examine_id` bigint(20) NULL DEFAULT NULL COMMENT '审批id--关联的审批的高级配置，以及审批的基础信息',
 `module_id` bigint(20) NULL DEFAULT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa',
 
@@ -152,7 +152,7 @@ PRIMARY KEY (`id`) USING BTREE
 
 DROP TABLE IF EXISTS `un_examine_record_node`;
 CREATE TABLE `un_examine_record_node`  (
- `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
+ `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
 `examine_id` bigint(20) NULL DEFAULT NULL COMMENT '审批id--关联的审批的高级配置，以及审批的基础信息',
 `module_id` bigint(20) NULL DEFAULT NULL COMMENT '模块id 关联模块--可以是业务，也可以是特殊的模块，比如oa',
 `record_id` bigint(20) NULL DEFAULT NULL COMMENT '关联的record_id',

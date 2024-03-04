@@ -19,7 +19,7 @@ public class ExamineSaveBO {
     @ApiModelProperty(value = "审批")
     private ExamineSetting examineSetting;
     @ApiModelProperty(value = "审批")
-    private ExamineSettingUser examineSettingUser;
+    private List<ExamineSettingUser> examineSettingUser;
 
     @ApiModelProperty(value = "审批节点")
     private List<ExamineNode> examineNodeList;
