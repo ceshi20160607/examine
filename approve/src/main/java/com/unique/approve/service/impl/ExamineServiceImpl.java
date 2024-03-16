@@ -57,7 +57,7 @@ public class ExamineServiceImpl extends ServiceImpl<ExamineMapper, Examine> impl
         }else{
             updateById(examine);
             examineSettingService.updateById(saveBO.getExamineSetting());
-            examineSettingUserService.updateBatchById(saveBO.getExamineSettingUser());
+            examineSettingUserService.saveOrUpdateBatch(saveBO.getExamineSettingUser());
         }
     }
 

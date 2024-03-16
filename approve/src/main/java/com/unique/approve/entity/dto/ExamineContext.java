@@ -40,6 +40,10 @@ public class ExamineContext implements Serializable {
     private Map<Long,List<ExamineNodeUser>> examineNodeUserList;
     //-------------------------审批节点信息------------------------------
     /**
+     * 审批业务数据---用于以后拓展 字段相关
+     */
+    private ExamineRecordParams examineRecordParams;
+    /**
      * 具体审批recordId
      */
     private Long examineRecordId ;
@@ -52,23 +56,41 @@ public class ExamineContext implements Serializable {
      */
     private List<ExamineRecordNode> examineRecordNodeList;
 
-    //-------------------------审批请求参数------------------------------
+    /**
+     * 具体审批-临时 以父级点为分组，顶级0开始
+     */
+    private Map<Long,List<ExamineRecordNode>> examineRecordNodeListMap;
+
+    //-------------------------审批-----------------------------
 //    //1.请求时候已经构建完成了审批的node
 //    //2.动态的添加审批节点的时候配置
 //    /**
 //     * 审批过程构建的参数
 //     */
 //    private List<ExamineNodeFill> examineNodeFillList;
-    //-------------------------审批请求参数------------------------------
+    //-------------------------审批前------------------------------
     /**
-     * 审批业务数据---用于以后拓展 字段相关
+     * 审批人自选的参数
      */
-    private ExamineOtherParams examineOtherParams;
-
+    private List<ExamineFillParams> examineFillParamsList;
     /**
      * 审批人审批的---入参
      * 张三审批通过了选择的通过+填写的备注信息
      */
-    private ExamineBefore examineBefore;
+    private ExamineBO examineBO;
+
+    //-------------------------审批中------------------------------
+    /**
+     * 具体nodeId
+     */
+    private Long examineNodeId ;
+
+    //-------------------------审批结果------------------------------
+    /**
+     * 审批后进行的数据更新
+     */
+    private List<ExamineRecordNode> examineRecordNodeUpdateList;
+
+
 
 }

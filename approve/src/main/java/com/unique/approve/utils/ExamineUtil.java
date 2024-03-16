@@ -2,6 +2,7 @@ package com.unique.approve.utils;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
+import com.unique.approve.entity.dto.*;
 import com.unique.approve.entity.po.*;
 import com.unique.approve.enums.TransferFlagEnum;
 import com.unique.core.bo.SendEmailBO;
@@ -10,10 +11,6 @@ import com.unique.core.utils.SearchFieldUtil;
 import com.unique.approve.enums.CheckStatusEnum;
 import com.unique.approve.enums.ExamineTypeEnum;
 import com.unique.approve.enums.ExamineNodeTypeEnum;
-import com.unique.approve.entity.dto.ExamineBefore;
-import com.unique.approve.entity.dto.ExamineContext;
-import com.unique.approve.entity.dto.ExamineOtherParams;
-import com.unique.approve.entity.dto.ExamineSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +33,7 @@ public class ExamineUtil {
      * @param status
      * @param examineRecordNodeList
      */
-    private static void examineBaseProcessCreate(ExamineNode r, Integer status, List<ExamineRecordNode> examineRecordNodeList) {
+    private static void examineBaseProcessCreate(ExamineNode r, Integer status, List<ExamineRecordNode> examineRecordNodeList,List<ExamineFillParams> examineFillParamsList) {
         List<ExamineNodeUser> nodeUserList = r.getNodeUserList();
         //审批人员  审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选4
         ExamineTypeEnum examineTypeEnum = ExamineTypeEnum.parse(r.getExamineType());
@@ -54,7 +51,8 @@ public class ExamineUtil {
                     recordLog1.setRoleId(t.getRoleId());
                     break;
                 case CHOOSE:
-                    recordLog1.setUserId(t.getUserId());
+                    //2.1.如果审批不全，需要补充的这里添加构建
+                    recordLog1.setUserId(examineFillParamsList.get(0).getUserId());
                     break;
             }
             recordLog1.setStatus(status);
@@ -68,8 +66,9 @@ public class ExamineUtil {
      * @date 2023/3/14
      */
     public static void createProcess(ExamineContext context) {
+
         //业务数据
-        ExamineOtherParams examineOtherParams = context.getExamineOtherParams();
+        ExamineRecordParams examineOtherParams = context.getExamineRecordParams();
         Examine examine = context.getExamine();
         //创建具体审批
         ExamineRecord examineRecord = BeanUtil.copyProperties(examine, ExamineRecord.class);
@@ -79,7 +78,8 @@ public class ExamineUtil {
         context.setExamineRecord(examineRecord);
 
         List<ExamineNode> examineTaskList = context.getExamineNodeList();
-
+        List<ExamineFillParams> examineFillParamsList = context.getExamineFillParamsList();
+        Map<Long, List<ExamineFillParams>> examineFillParamsListMap = examineFillParamsList.stream().collect(Collectors.groupingBy(r->r.getNodeId()));
         //创建初始数据
         List<ExamineRecordNode> examineRecordNodeList = new ArrayList<>();
         ExamineRecordNode recordLog = new ExamineRecordNode();
@@ -90,13 +90,11 @@ public class ExamineUtil {
         examineRecordNodeList.add(recordLog);
         for (int i = 0; i < examineTaskList.size(); i++) {
             ExamineNode r = examineTaskList.get(i);
-            Integer status = CheckStatusEnum.CHECK_CREATE.getType();
-            if (i==0) {
-                status = CheckStatusEnum.CHECK_ING.getType();
-            }
+            Integer status = CheckStatusEnum.CHECK_ING.getType();
+
             switch (ExamineNodeTypeEnum.parse(r.getNodeType())) {
                 case GENERAL:
-                    examineBaseProcessCreate(r,status, examineRecordNodeList);
+                    examineBaseProcessCreate(r,status, examineRecordNodeList, examineFillParamsListMap.get(r.getId()));
                     break;
                 case CONDITION:
                     ExamineRecordNode recordLog5 = BeanUtil.copyProperties(r,ExamineRecordNode.class);
@@ -127,6 +125,7 @@ public class ExamineUtil {
      */
     public static void examineProcess (ExamineContext context){
         //todo:适配审批的配置来进行后续的循环处理后续的审批
+        //todo:这里要进行高级配置的处理
         List<ExamineRecordNode> ExamineRecordNodeList = context.getExamineRecordNodeList().stream().filter(r->r.getStatus().equals(CheckStatusEnum.CHECK_ING.getType())).collect(Collectors.toList());
         switch (ExamineNodeTypeEnum.parse(ExamineRecordNodeList.get(0).getNodeType())){
             case GENERAL:
@@ -154,7 +153,7 @@ public class ExamineUtil {
      */
     public static void generalProcess(ExamineContext context) {
         Boolean gFlag = Boolean.FALSE;
-        ExamineBefore examineBefore = context.getExamineBefore();
+        ExamineBO examineBO = context.getExamineBO();
         List<ExamineRecordNode> ExamineRecordNodeList = context.getExamineRecordNodeList();
         Long recordLogId = null;
         for (ExamineRecordNode r : ExamineRecordNodeList) {
@@ -162,14 +161,14 @@ public class ExamineUtil {
             TransferFlagEnum transferFlagEnum = TransferFlagEnum.parse(r.getTransferFlag());
             if (CheckStatusEnum.CHECK_ING.equals(checkStatusEnum)) {
                 if(!TransferFlagEnum.DEFAULT.equals(transferFlagEnum)){
-                    if (r.getUserId().equals(examineBefore.getUserId())) {
+                    if (r.getUserId().equals(examineBO.getUserId())) {
                         gFlag = Boolean.TRUE;
                         recordLogId = r.getId();
                         r.setStatus(CheckStatusEnum.CHECK_PASS.getType());
                     }
                 }
                 if(TransferFlagEnum.TRANSFER.equals(transferFlagEnum)){
-                    if (r.getTransferUserId().equals(examineBefore.getUserId())) {
+                    if (r.getTransferUserId().equals(examineBO.getUserId())) {
                         gFlag = Boolean.TRUE;
                         recordLogId = r.getId();
                         r.setStatus(CheckStatusEnum.CHECK_PASS.getType());
@@ -192,15 +191,15 @@ public class ExamineUtil {
      * @param context
      */
     public static void  conditionProcess(ExamineContext context) {
-        Map<String, Object> entity = context.getExamineOtherParams().getEntity();
+        Map<String, Object> entity = context.getExamineRecordParams().getEntity();
         List<ExamineRecordNode> ExamineRecordNodeList = context.getExamineRecordNodeList().stream().filter(r->r.getStatus().equals(CheckStatusEnum.CHECK_ING.getType())).collect(Collectors.toList());
         Boolean itemRet = Boolean.TRUE;
         for (ExamineRecordNode r : ExamineRecordNodeList) {
             if (!itemRet) {
                 r.setStatus(CheckStatusEnum.CHECK_DISCARD.getType());
             }
-            List<ExamineSearch> examineSearcheList = JSON.parseArray(r.getConditionModuleFieldSearch(), ExamineSearch.class);
-            for (ExamineSearch search : examineSearcheList) {
+            List<ExamineSearch> examineSearchList = JSON.parseArray(r.getConditionModuleFieldSearch(), ExamineSearch.class);
+            for (ExamineSearch search : examineSearchList) {
                 itemRet = itemRet && SearchFieldUtil.searchConditionValue(search, entity);
             }
             if (itemRet) {

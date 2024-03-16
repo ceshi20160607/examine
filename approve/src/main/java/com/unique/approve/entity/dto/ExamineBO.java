@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @verson 1.0.0
  */
 @Data
-public class ExamineBefore implements Serializable {
+public class ExamineBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

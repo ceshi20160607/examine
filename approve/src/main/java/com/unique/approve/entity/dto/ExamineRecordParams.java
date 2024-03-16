@@ -13,18 +13,27 @@ import java.util.Map;
  * @verson 1.0.0
  */
 @Data
-public class ExamineOtherParams implements Serializable {
+public class ExamineRecordParams implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty("企业id")
+    private Long companyId;
+
+    @ApiModelProperty("创建人")
+    private Long createUserId;
+
+
+    //---------------------------------------
     @ApiModelProperty("其他参数")
     private Map<String,Object> entity;
+
+    //---------------------------------------
+
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("创建人")
-    private Long createUserId;
 
     @ApiModelProperty("修改时间")
     private LocalDateTime updateTime;
@@ -32,6 +41,4 @@ public class ExamineOtherParams implements Serializable {
     @ApiModelProperty("修改人")
     private Long updateUserId;
 
-    @ApiModelProperty("企业id")
-    private Long companyId;
 }
