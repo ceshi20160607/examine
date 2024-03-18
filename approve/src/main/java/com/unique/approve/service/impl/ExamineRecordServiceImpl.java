@@ -1,15 +1,20 @@
 package com.unique.approve.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.unique.approve.entity.dto.ExamineContext;
 import com.unique.approve.entity.po.*;
+import com.unique.approve.enums.ExamineNodeTypeEnum;
+import com.unique.approve.handler.AbstractHandler;
+import com.unique.approve.handler.CreateHandler;
+import com.unique.approve.handler.HandlerService;
 import com.unique.approve.mapper.ExamineRecordMapper;
 import com.unique.approve.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.unique.approve.utils.ExamineUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +30,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ExamineRecordServiceImpl extends ServiceImpl<ExamineRecordMapper, ExamineRecord> implements IExamineRecordService {
+
+    @Resource
+    private HandlerService handlerService;
+
     @Autowired
     private IExamineService examineService;
     @Autowired
@@ -46,8 +55,9 @@ public class ExamineRecordServiceImpl extends ServiceImpl<ExamineRecordMapper, E
     public void create(ExamineContext context) {
 
         fillBaseExamine(context,Boolean.FALSE);
-        //3.创建审批业务实例Record
-        ExamineUtil.createProcess(context);
+//        //3.创建审批业务实例Record
+        CreateHandler createHandler = new CreateHandler();
+        createHandler.build(context);
         //4保存=》db
         save(context.getExamineRecord());
         examineRecordNodeService.saveOrUpdateBatch(context.getExamineRecordNodeUpdateList());
@@ -58,10 +68,16 @@ public class ExamineRecordServiceImpl extends ServiceImpl<ExamineRecordMapper, E
     public void process(ExamineContext context) {
 
         fillBaseExamine(context,Boolean.TRUE);
-        ExamineUtil.examineProcess(context);
-        //5.执行更新
+        //2.获取当前要进行审批的node
+        Long examineNodeId = context.getExamineNodeId();
+        List<ExamineRecordNode> afterNodes = context.getExamineRecordNodeListMap().get(examineNodeId);
+        if (CollectionUtil.isNotEmpty(afterNodes)) {
+            AbstractHandler baseService = handlerService.getHandlerService(ExamineNodeTypeEnum.parse(afterNodes.get(0).getNodeType()));
+            //3.执行下一个处理人
+            baseService.handle(context);
+        }
+        //4.执行更新
         examineRecordNodeService.saveOrUpdateBatch(context.getExamineRecordNodeUpdateList());
-        //6.业务更新
     }
     //---------------------------------基础参数------------------------------------
     /**补全基础数据
@@ -83,7 +99,8 @@ public class ExamineRecordServiceImpl extends ServiceImpl<ExamineRecordMapper, E
 
         //1.4examineNode基础数据
         List<ExamineNode> examineNodeList = examineNodeService.lambdaQuery().eq(ExamineNode::getExamineId, context.getExamineId()).orderByAsc(ExamineNode::getId).list();
-        context.setExamineNodeList(examineNodeList);
+        Map<Long, List<ExamineNode>> examineNodeListMap = examineNodeList.stream().collect(Collectors.groupingBy(r -> r.getNodeBeforeId()));
+        context.setExamineNodeListMap(examineNodeListMap);
 
         //1.5.examineNodeUser基础数据
         List<ExamineNodeUser> examineNodeUserList = examineNodeUserService.lambdaQuery().eq(ExamineNodeUser::getExamineId, context.getExamineId()).orderByAsc(ExamineNodeUser::getId).list();

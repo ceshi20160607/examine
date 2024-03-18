@@ -10,7 +10,7 @@ public enum ExamineNodeTypeEnum {
      * 审批 类型枚举
      */
     CREATE(0,"创建"),
-    GENERAL (1, "普通审批"),
+    BASE(1, "普通审批"),
     CONDITION (2, "条件审批"),
     CC(3, "抄送"),
     TRANSFER (4, "转他人处理"),

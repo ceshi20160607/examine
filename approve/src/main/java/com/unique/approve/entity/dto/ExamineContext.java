@@ -33,7 +33,7 @@ public class ExamineContext implements Serializable {
     /**
      * 审批节点信息
      */
-    private List<ExamineNode> examineNodeList;
+    private Map<Long,List<ExamineNode>> examineNodeListMap;
     /**
      * 审批节点信息用户相关
      */
