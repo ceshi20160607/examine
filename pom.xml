@@ -20,7 +20,6 @@
         <module>core</module>
         <module>note</module>
         <module>admin</module>
-        <module>web</module>
         <module>javassist</module>
         <module>field</module>
         <module>approve</module>
