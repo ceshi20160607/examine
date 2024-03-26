@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.unique.admin.mapper.AdminDeptMapper">
-
-    <select id="queryPageList" resultType="com.unique.admin.entity.po.AdminDept">
-        select *
-        from un_admin_dept
-    </select>
-</mapper>

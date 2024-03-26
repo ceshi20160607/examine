@@ -22,6 +22,11 @@ public class CcHandler extends AbstractHandler{
     }
 
     @Override
+    public void build(ExamineContext context) {
+
+    }
+
+    @Override
     public void handle(ExamineContext context) {
 //1.校验
         Long examineNodeId = context.getExamineNodeId();
