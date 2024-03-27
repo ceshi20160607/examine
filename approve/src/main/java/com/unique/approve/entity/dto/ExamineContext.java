@@ -51,10 +51,10 @@ public class ExamineContext implements Serializable {
      * 具体审批
      */
     private ExamineRecord examineRecord ;
-    /**
-     * 具体审批-审批日志
-     */
-    private List<ExamineRecordNode> examineRecordNodeList;
+//    /**
+//     * 具体审批-审批日志
+//     */
+//    private List<ExamineRecordNode> examineRecordNodeList;
 
     /**
      * 具体审批-临时 以父级点为分组，顶级0开始

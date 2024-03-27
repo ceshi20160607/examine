@@ -35,8 +35,6 @@ public class CreateHandler extends AbstractHandler{
     @Override
     public void build(ExamineContext context) {
         //0.更新
-        Boolean gFlag = Boolean.FALSE;
-        Map<Long,List<ExamineNode>> examineRecordNodeListMap = new HashMap<>();
         //1.获取审批信息
         Examine examine = context.getExamine();
         //2.当前审批实例信息
@@ -60,15 +58,13 @@ public class CreateHandler extends AbstractHandler{
         
         
         //8.最后的数据
-        context.setExamineRecordNodeList(examineRecordNodes);
+        context.setExamineRecordNodeUpdateList(examineRecordNodes);
         //9.如果要进行下一步需要处理
-        if (gFlag) {
-            List<ExamineRecordNode> afterNodes = context.getExamineRecordNodeListMap().get(nodeAfterId);
-            if (CollectionUtil.isNotEmpty(afterNodes)) {
-                setNextHandler(handlerService.getHandlerService(ExamineNodeTypeEnum.parse(afterNodes.get(0).getNodeType())));
-                //8.执行下一个处理人
-                getNextHandler().build(context);
-            }
+        List<ExamineRecordNode> afterNodes = context.getExamineRecordNodeListMap().get(nodeAfterId);
+        if (CollectionUtil.isNotEmpty(afterNodes)) {
+            setNextHandler(handlerService.getHandlerService(ExamineNodeTypeEnum.parse(afterNodes.get(0).getNodeType())));
+            //8.执行下一个处理人
+            getNextHandler().build(context);
         }
     }
 

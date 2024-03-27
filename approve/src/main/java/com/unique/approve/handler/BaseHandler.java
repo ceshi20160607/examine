@@ -35,7 +35,7 @@ public class BaseHandler extends AbstractHandler{
     @Override
     public void build(ExamineContext context) {
         //0.更新
-        List<ExamineRecordNode> examineRecordNodes = context.getExamineRecordNodeList();
+        List<ExamineRecordNode> examineRecordNodes = context.getExamineRecordNodeUpdateList();
         //1.本次节点
         Long examineNodeId = context.getExamineNodeId();
         Map<Long, List<ExamineNode>> examineNodeListMap = new HashMap<>();
@@ -48,6 +48,7 @@ public class BaseHandler extends AbstractHandler{
         List<ExamineFillParams> examineFillParams = examineFillParamsListMap.get(examineNodeId);
 
         //5.构建node
+        Long nodeAfterId = examineNodes.get(0).getNodeAfterId();
         for (ExamineNode r : examineNodes) {
             Integer status = CheckStatusEnum.CHECK_ING.getType();
             //审批人员  审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选4
@@ -76,6 +77,13 @@ public class BaseHandler extends AbstractHandler{
         }
         //6.最后的数据
         context.setExamineRecordNodeUpdateList(examineRecordNodes);
+        //9.如果要进行下一步需要处理
+        List<ExamineRecordNode> afterNodes = context.getExamineRecordNodeListMap().get(nodeAfterId);
+        if (CollectionUtil.isNotEmpty(afterNodes)) {
+            setNextHandler(handlerService.getHandlerService(ExamineNodeTypeEnum.parse(afterNodes.get(0).getNodeType())));
+            //8.执行下一个处理人
+            getNextHandler().build(context);
+        }
     }
 
     /** 执行逻辑

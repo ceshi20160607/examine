@@ -120,7 +120,8 @@ public class ExamineRecordServiceImpl extends ServiceImpl<ExamineRecordMapper, E
             context.setExamineRecord(examineRecord);
             //3.2.examineRecordNode基础数据
             List<ExamineRecordNode> examineRecordNodeList = examineRecordNodeService.lambdaQuery().eq(ExamineRecordNode::getRecordId, context.getExamineRecordId()).list();
-            context.setExamineRecordNodeList(examineRecordNodeList);
+            Map<Long, List<ExamineRecordNode>> examineRecordNodeListMap = examineRecordNodeList.stream().collect(Collectors.groupingBy(ExamineRecordNode::getNodeBeforeId));
+            context.setExamineRecordNodeListMap(examineRecordNodeListMap);
         }
     }
 }
