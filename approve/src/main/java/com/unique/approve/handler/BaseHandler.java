@@ -48,7 +48,7 @@ public class BaseHandler extends AbstractHandler{
         List<ExamineFillParams> examineFillParams = examineFillParamsListMap.get(examineNodeId);
 
         //5.构建node
-        Long nodeAfterId = examineNodes.get(0).getNodeAfterId();
+        Long nodeAfterId = examineNodes.get(0).getId();
         for (ExamineNode r : examineNodes) {
             Integer status = CheckStatusEnum.CHECK_ING.getType();
             //审批人员  审批人类型 0 固定人员 1 固定人员上级 2角色 3发起人自选4
@@ -121,7 +121,7 @@ public class BaseHandler extends AbstractHandler{
                 }
                 if (r.getUserId().equals(examineUserId)) {
                     gFlag = Boolean.TRUE;
-                    nodeAfterId = r.getNodeAfterId();
+                    nodeAfterId = r.getId();
                     r.setStatus(CheckStatusEnum.CHECK_PASS.getType());
                 }
             }else{
@@ -136,7 +136,7 @@ public class BaseHandler extends AbstractHandler{
                         //2.1.固定审批人
                         if (r.getUserId().equals(examineUserId)) {
                             gFlag = Boolean.TRUE;
-                            nodeAfterId = r.getNodeAfterId();
+                            nodeAfterId = r.getId();
                             r.setStatus(CheckStatusEnum.CHECK_PASS.getType());
                         }
                         break;

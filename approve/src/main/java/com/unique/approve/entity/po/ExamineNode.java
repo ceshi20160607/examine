@@ -45,8 +45,8 @@ public class ExamineNode implements Serializable {
     @ApiModelProperty("审批的类型 0动态添加 1普通审批 2条件审批 3抄送 4转他人处理 ")
     private Integer nodeType;
 
-    @ApiModelProperty("审批的类型 1结束节点或者其他节点")
-    private Long nodeAfterId;
+//    @ApiModelProperty("审批的类型 1结束节点或者其他节点")
+//    private Long nodeAfterId;
 
     @ApiModelProperty("节点排序 默认0")
     private Integer nodeSort;

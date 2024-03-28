@@ -25,6 +25,8 @@ public class ExamineRecordParams implements Serializable {
 
 
     //---------------------------------------
+    @ApiModelProperty("客户自己的业务id")
+    private Long relationId;
     @ApiModelProperty("其他参数")
     private Map<String,Object> entity;
 

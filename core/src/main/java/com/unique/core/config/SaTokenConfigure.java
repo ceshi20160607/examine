@@ -56,7 +56,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         System.out.println("--------- flag 1");
         registry.addInterceptor(new SaInterceptor(handle -> {
                     System.out.println("--------- flag 2，请求进入了拦截器，访问的 path 是：" + SaHolder.getRequest().getRequestPath());
+                    System.out.println("----"+StpUtil.getLoginId());
                     StpUtil.checkLogin();  // 登录校验，只有会话登录后才能通过这句代码
+                    System.out.println("----"+StpUtil.getLoginId());
                 }))
 //                .addPathPatterns("/user/**")
                 .addPathPatterns("/**")
@@ -110,8 +112,11 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         javaTimeModule.addDeserializer(Date.class, new DateDeserializers.DateDeserializer());
 //        javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
+        //添加此配置
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         om.registerModule(javaTimeModule);
+
         return om;
     }
 

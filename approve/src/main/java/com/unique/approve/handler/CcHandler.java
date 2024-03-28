@@ -39,7 +39,7 @@ public class CcHandler extends AbstractHandler{
         List<ExamineNodeUser> ExamineNodeUsers = examineNodeUserListMap.get(examineNodeId);
 
         //5.构建node
-        Long nodeAfterId = examineNodes.get(0).getNodeAfterId();
+        Long nodeAfterId = examineNodes.get(0).getId();
         for (ExamineNode r : examineNodes) {
             Integer status = CheckStatusEnum.CHECK_ING.getType();
             for (ExamineNodeUser t : ExamineNodeUsers) {
@@ -72,9 +72,8 @@ public class CcHandler extends AbstractHandler{
     }
 
     private void baseProcess(List<ExamineRecordNode> nodes, ExamineContext context) {
-        Long nodeAfterId = null;
+        Long nodeAfterId = nodes.get(0).getId();
         for (ExamineRecordNode r : nodes) {
-            nodeAfterId = r.getNodeAfterId();
             String[] split = r.getCopyEmails().split(",");
             SendEmailBO sendEmailBO = new SendEmailBO();
             sendEmailBO.setEmails(split);

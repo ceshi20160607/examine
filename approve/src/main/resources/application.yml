@@ -14,6 +14,14 @@ spring:
     time-zone: GMT+8
 #    serialization:
 #      write-dates-as-timestamps: false
+  #循环依赖
+  main:
+    allow-circular-references: true
+---
+# 设置算法片段
+approve:
+  workerId: 1
+  datacenterId: 1
 ---
 # redis配置
 spring:
@@ -53,7 +61,7 @@ spring:
       datasource:
         #默认的bi配置
         default:
-          url: jdbc:mysql://8.142.109.85:3306/unexamine?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://8.142.109.85:3306/unexamine2?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai&useAffectedRows=true&allowPublicKeyRetrieval=true
           username: un
           password: password
 ---

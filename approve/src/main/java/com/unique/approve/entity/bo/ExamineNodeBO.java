@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.unique.approve.entity.po.ExamineNodeUser;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,15 +20,10 @@ import java.util.List;
  * @author UNIQUE
  * @since 2024-01-30
  */
-@Getter
-@Setter
-@TableName("un_examine_node")
-@ApiModel(value = "ExamineNode对象", description = "审批节点表")
+@Data
+@ApiModel(value = "ExamineNodeBO对象", description = "审批节点表")
 public class ExamineNodeBO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("审批id--关联的审批的高级配置，以及审批的基础信息")
@@ -42,8 +38,8 @@ public class ExamineNodeBO implements Serializable {
     @ApiModelProperty("审批的类型 0动态添加 1普通审批 2条件审批 3抄送 4转他人处理 ")
     private Integer nodeType;
 
-    @ApiModelProperty("审批的类型 1结束节点或者其他节点")
-    private Long nodeAfterId;
+//    @ApiModelProperty("审批的类型 1结束节点或者其他节点")
+//    private Long nodeAfterId;
 
     @ApiModelProperty("节点排序 默认0")
     private Integer nodeSort;
@@ -85,24 +81,23 @@ public class ExamineNodeBO implements Serializable {
     private String remarks;
 
     @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @ApiModelProperty("创建人")
-    @TableField(fill = FieldFill.INSERT)
     private Long createUserId;
 
     @ApiModelProperty("修改时间")
-    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
 
     @ApiModelProperty("修改人")
-    @TableField(fill = FieldFill.UPDATE)
     private Long updateUserId;
 
     @ApiModelProperty("企业id")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long companyId;
 
+
+    //-------------------------------
+    @ApiModelProperty("字节的")
+    private List<ExamineNodeBO> subNodeList;
 
 }

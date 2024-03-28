@@ -42,6 +42,7 @@ public class CreateHandler extends AbstractHandler{
         //3.
         //4.创建审批记录
         ExamineRecord examineRecord = BeanUtil.copyProperties(examine, ExamineRecord.class);
+        examineRecord.setRelationId(examineOtherParams.getRelationId());
         examineRecord.setCreateUserId(examineOtherParams.getCreateUserId());
         examineRecord.setCreateTime(LocalDateTime.now());
         examineRecord.setUpdateTime(LocalDateTime.now());
@@ -49,18 +50,18 @@ public class CreateHandler extends AbstractHandler{
 
         //5.创建初始数据
         List<ExamineRecordNode> examineRecordNodes = new ArrayList<>();
-        List<ExamineNode> examineNodes = context.getExamineNodeListMap().get(0);
+        List<ExamineNode> examineNodes = context.getExamineNodeListMap().get(0L);
         ExamineNode node = examineNodes.get(0);
         ExamineRecordNode recordLog = BeanUtil.copyProperties(node, ExamineRecordNode.class);
         examineRecordNodes.add(recordLog);
         //6.下一个处理人
-        Long nodeAfterId = node.getNodeAfterId();
+        Long nodeAfterId = node.getId();
         
         
         //8.最后的数据
         context.setExamineRecordNodeUpdateList(examineRecordNodes);
         //9.如果要进行下一步需要处理
-        List<ExamineRecordNode> afterNodes = context.getExamineRecordNodeListMap().get(nodeAfterId);
+        List<ExamineNode> afterNodes = context.getExamineNodeListMap().get(nodeAfterId);
         if (CollectionUtil.isNotEmpty(afterNodes)) {
             setNextHandler(handlerService.getHandlerService(ExamineNodeTypeEnum.parse(afterNodes.get(0).getNodeType())));
             //8.执行下一个处理人
